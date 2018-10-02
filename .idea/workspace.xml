@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="716f09d4-f2f3-4345-bc8a-59e4447e88d3" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/controlPanelPilote/espace.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/controlPanelPilote/getInfos.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controlPanelPilote/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/controlPanelPilote/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controlPanelPilote/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/controlPanelPilote/script.js" afterDir="false" />
@@ -23,8 +23,17 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controlPanelPilote/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="65" column="31" selection-start-line="65" selection-start-column="23" selection-end-line="65" selection-end-column="31" />
+            <state relative-caret-position="544">
+              <caret line="32" column="55" selection-start-line="32" selection-start-column="38" selection-end-line="32" selection-end-column="55" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/controlPanelPilote/style.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="388">
+              <caret line="183" column="22" selection-start-line="183" selection-start-column="22" selection-end-line="183" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -33,16 +42,7 @@
         <entry file="file://$PROJECT_DIR$/controlPanelPilote/script.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="347">
-              <caret line="134" lean-forward="true" selection-start-line="134" selection-end-line="134" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/controlPanelPilote/style.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="473">
-              <caret line="147" column="36" selection-start-line="147" selection-start-column="36" selection-end-line="147" selection-end-column="36" />
+              <caret line="171" column="29" selection-start-line="171" selection-start-column="29" selection-end-line="171" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -71,8 +71,9 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/controlPanelPilote/css.css" />
-        <option value="$PROJECT_DIR$/controlPanelPilote/index.html" />
         <option value="$PROJECT_DIR$/controlPanelPilote/style.css" />
+        <option value="$PROJECT_DIR$/controlPanelPilote/getInfos.js" />
+        <option value="$PROJECT_DIR$/controlPanelPilote/index.html" />
         <option value="$PROJECT_DIR$/controlPanelPilote/script.js" />
       </list>
     </option>
@@ -158,18 +159,18 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1538468437587</updated>
-      <workItem from="1538468438797" duration="15402000" />
+      <workItem from="1538468438797" duration="20869000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15402000" />
+    <option name="totallyTimeSpent" value="20869000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24980484" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1498829" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
@@ -216,24 +217,31 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/controlPanelPilote/index.html">
+    <entry file="file://$PROJECT_DIR$/controlPanelPilote/getInfos.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="65" column="31" selection-start-line="65" selection-start-column="23" selection-end-line="65" selection-end-column="31" />
+        <state relative-caret-position="510">
+          <caret line="30" column="6" lean-forward="true" selection-start-line="1" selection-start-column="4" selection-end-line="30" selection-end-column="6" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/controlPanelPilote/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="473">
-          <caret line="147" column="36" selection-start-line="147" selection-start-column="36" selection-end-line="147" selection-end-column="36" />
+        <state relative-caret-position="388">
+          <caret line="183" column="22" selection-start-line="183" selection-start-column="22" selection-end-line="183" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controlPanelPilote/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="32" column="55" selection-start-line="32" selection-start-column="38" selection-end-line="32" selection-end-column="55" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/controlPanelPilote/script.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="347">
-          <caret line="134" lean-forward="true" selection-start-line="134" selection-end-line="134" />
+          <caret line="171" column="29" selection-start-line="171" selection-start-column="29" selection-end-line="171" selection-end-column="29" />
         </state>
       </provider>
     </entry>

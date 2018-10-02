@@ -12,68 +12,99 @@
 
 <div id="overlay"></div>
 
-<div class="controlPanel">
-    <h1>Panneau de controle du vaisseau spacial !</h1>
+<div class="containerPanel">
+    <div class="affichagePanel">
+        <h2>Vaisseau</h2>
+        <p>LIFE/100 : <span id="spanLife" class="spanShowInfo"></span></p>
+        <p>ANGLE : <span id="spanAngle" class="spanShowInfo"></span></p>
+        <p>TURN TO ANGLE : <span id="spanTurnToAngle" class="spanShowInfo"></span></p>
+        <p>X POSITION : <span id="spanXPosition" class="spanShowInfo"></span></p>
+        <p>Y POSITION : <span id="spanYPosition" class="spanShowInfo"></span></p>
 
-    <hr>
+        <h2>Tourelle</h2>
+        <p>ANGLE : <span id="spanAngleTourelle" class="spanShowInfo"></span></p>
+        <p>TURN TO ANGLE : <span id="spanTurnToAngleTourelle" class="spanShowInfo"></span></p>
+        <p>RELOADING : <span id="spanReloading" class="spanShowInfo"></span></p>
+        <p>RELOADED : <span id="spanReloaded" class="spanShowInfo"></span></p>
 
-    <div class="controlPanelMove">
-        <h2>Avancer</h2>
-        <div class="reglerPuissancePropulseur">
-            <label for="rangePropulseur">Puissance du propulseur</label>
-            <label id="affichagePropulseur" class="affichagePropulseur"></label>
-            <input
-                    min="1"
-                    max="10"
-                    value="5"
-                    class="rangePropulseur"
-                    id="rangePropulseur"
-                    type="range">
-        </div>
-        <div class="btnAvancer">
-            <div class="rightArrow">
-                <i id="btnAvancer" class="fas fa-arrow-right fa-6x"></i>
-            </div>
-        </div>
+        <h2>Energie</h2>
+        <p>SYSTEM (HEALTH) : <span id="spanSystemHealth" class="spanShowInfo"></span></p>
+        <p>SHIELD : <span id="spanShield" class="spanShowInfo"></span></p>
+        <p>THRUSTER POWER : <span id="spanThrusterPower" class="spanShowInfo"></span></p>
     </div>
+    <div class="controlPanel">
+        <h1 id="affichageUserName"></h1>
 
-    <hr>
+        <hr>
 
-    <div class="controlPanelRotate">
-        <h2>Rotation</h2>
-
-        <div class="blocRotate">
-            <div>
-                <span id="affichageAngleRotation">0 °</span>
+        <div class="controlPanelMove">
+            <h2>Avancer</h2>
+            <div class="reglerPuissancePropulseur">
+                <label for="rangePropulseur">Puissance du propulseur</label>
+                <label id="affichagePropulseur" class="affichagePropulseur"></label>
+                <input
+                        min="1"
+                        max="10"
+                        value="5"
+                        class="rangePropulseur"
+                        id="rangePropulseur"
+                        type="range">
             </div>
-            <div class="rocket">
-                <i id="rocketIcon" class="fas fa-rocket fa-6x"></i>
-            </div>
-            <div class="rotateArrows">
-                <div class="rotatePositive">
-                    <i id="btnRotateUp" class="fas fa-arrow-up fa-4x"></i>
-                </div>
-                <div class="rotateNegative">
-                    <i id="btnRotateDown" class="fas fa-arrow-down fa-4x"></i>
+            <div class="btnAvancer">
+                <div class="rightArrow">
+                    <i id="btnAvancer" class="fas fa-arrow-right fa-6x"></i>
                 </div>
             </div>
         </div>
+
+        <hr>
+
+        <div class="controlPanelRotate">
+            <h2>Rotation</h2>
+
+            <div class="blocRotate">
+                <div>
+                    <span id="affichageAngleRotation">0 °</span>
+                </div>
+                <div class="rocket">
+                    <i id="rocketIcon" class="fas fa-rocket fa-6x"></i>
+                </div>
+                <div class="rotateArrows">
+                    <div class="rotatePositive">
+                        <i id="btnRotateUp" class="fas fa-arrow-up fa-4x"></i>
+                    </div>
+                    <div class="rotateNegative">
+                        <i id="btnRotateDown" class="fas fa-arrow-down fa-4x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
     </div>
 
     <div class="modal" id="modal">
         <div class="form-group">
-            <label for="userName">Votre nom</label>
+            <label class="required" for="userName">Votre nom</label>
             <input id="userName" class="form-control" type="text">
+            <span id="errorName"></span>
         </div>
         <div class="form-group">
-            <label for="avatar">Votre avatar</label>
-            <input id="avatar" class="form-control" type="text">
+            <label class="required" for="role">Votre rôle</label>
+            <select id="role" class="form-control">
+                <option value="Pilote de ouf">Pilote de ouf</option>
+                <option value="Artilleur d'élite">Artilleur d'élite</option>
+                <option value="Ingénieur de la nasa">Ingénieur de la nasa</option>
+                <option value="Capitaine de navire">Capitaine de navire</option>
+            </select>
         </div>
+
 
         <button id="btnValiderModal" class="btn btn-primary">Valider</button>
     </div>
-
 </div>
+
 
 </body>
 </html>

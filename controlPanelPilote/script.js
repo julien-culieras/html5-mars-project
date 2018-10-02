@@ -9,7 +9,7 @@ window.onload = function () {
     const timeMove = 100;
     const pasAngleRotation = 15;
     const angleBase = 45;
-    let userNameValue = null;
+
 
     /*
      Elements DOM
@@ -25,6 +25,10 @@ window.onload = function () {
     const overlay = document.getElementById('overlay');
     const btnValiderModal = document.getElementById('btnValiderModal');
     const userName = document.getElementById('userName');
+    const affichageUserName = document.getElementById('affichageUserName');
+    const role = document.getElementById('role');
+    const errorName = document.getElementById('errorName');
+
 
     initUser();
 
@@ -52,6 +56,29 @@ window.onload = function () {
     document.addEventListener('keyup', (event) => {
         if (event.key === 'ArrowRight') stop();
     });
+
+    /*
+    ws.onmessage = (message) => {
+        const { name, data, error } = JSON.parse(message.data);
+        spaceshipData = data;
+
+
+        setValLeftPannel('spanLife', data.life);
+        setValLeftPannel('spanAngle', data.angle + ' °');
+        setValLeftPannel('spanTurnToAngle', data.turnTo + ' °');
+        setValLeftPannel('spanXPosition', Math.round(data.x));
+        setValLeftPannel('spanYPosition', Math.round(data.y));
+        setValLeftPannel('spanAngleTourelle', data.turretAngle + ' °');
+        setValLeftPannel('spanTurnToAngleTourelle', data.turretTurnTo + ' °');
+        setValLeftPannel('spanReloading', data.reloading ? 'Yes' : 'False');
+        setValLeftPannel('spanReloaded', data.reloaded ? 'Yes' : 'False');
+        setValLeftPannel('spanSystemHealth', Math.round(data.systemPower * 100) + ' %');
+        setValLeftPannel('spanShield', Math.round(data.shieldPower * 100) + ' %');
+        setValLeftPannel('spanThrusterPower', Math.round(data.systemPower * 100) + ' %');
+
+
+    };
+    */
 
 
     function avancer() {
@@ -126,14 +153,24 @@ window.onload = function () {
     }
 
     function closeModal() {
-        userNameValue = userName.value;
-        
+        let userNameValue = userName.value;
 
-        modal.style.transition = '500ms linear';
-        modal.style.display = 'none';
-        overlay.style.display = 'none';
+        if (userNameValue) {
+            let roleValue = role.value;
+            affichageUserName.innerText = 'Bienvenue ' + userNameValue + ', notre ' + roleValue + ' !';
+
+            modal.style.transition = '500ms linear';
+            modal.style.display = 'none';
+            overlay.style.display = 'none';
+        }
+        else errorName.innerText = 'Veuillez entrer votre pseudo !';
+
     }
 
+    function setValLeftPannel(idval, jsonVal){
+        document.getElementById(idval).innerText = jsonVal;
+        console.log(jsonVal);
+    }
 
 };
 

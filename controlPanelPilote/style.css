@@ -2,16 +2,32 @@ body{
     background: url("espace.jpg") no-repeat;
 }
 
-.controlPanel{
-    max-width: 700px;
+.containerPanel{
+    display: flex;
+    flex-direction: row;
+}
+
+.affichagePanel{
+    width: 300px;
+    margin-right: 5px;
     border: 2px solid grey;
     border-radius: 5px;
-    margin-left: auto;
-    margin-right: auto;
+    text-align: left;
+    padding: 25px;
+    background-color: rgba(0,0,0,0.7);
+    box-sizing: border-box;
+    min-height: 100vh;
+}
+
+.controlPanel{
+    border: 2px solid grey;
+    border-radius: 5px;
     text-align: center;
     padding: 50px;
     background-color: rgba(255,255,255,0.7);
     box-sizing: border-box;
+    min-height: 100vh;
+    width: calc(100% - 300px);
 }
 
 .controlPanelMove{
@@ -126,13 +142,13 @@ input[type='range']::-moz-range-thumb {
 .modal{
     position: absolute;
     display: none;
-    max-width: 900px;
+    max-width: 700px;
     background-color: #fff;
     margin-left: auto;
     margin-right: auto;
     padding: 50px;
     margin-top: 50px;
-    height: 350px;
+    height: 320px;
     border-radius: 5px;
 }
 
@@ -148,4 +164,23 @@ input[type='range']::-moz-range-thumb {
     background-color: rgba(0,0,0,0.8); /* Black background with opacity */
     z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
     cursor: pointer; /* Add a pointer on hover */
+}
+
+.required:after{
+    content: ' *';
+    color: red;
+}
+
+#errorName{
+    color: red;
+}
+
+.affichagePanel{
+    color: #fff;
+}
+
+.spanShowInfo{
+    font-size: 18px;
+    font-weight: bold;
+    color: #2d8e2a;
 }
