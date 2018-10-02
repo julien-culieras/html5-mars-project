@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Panneau de controle</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="controlPanel">
+    <h1>Panneau de controle du vaisseaux spacial !</h1>
+
+    <hr>
+
+    <div class="controlPanelMove">
+        <h2>Avancer</h2>
+        <div class="reglerPuissancePropulseur">
+            <label for="rangePropulseur">Puissance du propulseur</label>
+            <label id="affichagePropulseur" class="affichagePropulseur"></label>
+            <input
+                    min="1"
+                    max="10"
+                    value="5"
+                    class="rangePropulseur"
+                    id="rangePropulseur"
+                    type="range">
+        </div>
+        <div class="btnAvancer">
+            <div class="rightArrow">
+                <i id="btnAvancer" class="fas fa-arrow-right fa-6x"></i>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="controlPanelRotate">
+        <h2>Rotation</h2>
+
+        <div class="blocRotate">
+            <div class="rocket">
+                <i class="fas fa-rocket fa-6x"></i>
+            </div>
+            <div class="rotateArrows">
+                <div class="rotatePositive">
+                    <i class="fas fa-arrow-up fa-4x"></i>
+                </div>
+                <div class="rotateNegative">
+                    <i class="fas fa-arrow-down fa-4x"></i>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
+
+<script src="script.js"></script>

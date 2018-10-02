@@ -1,0 +1,72 @@
+body{
+    background-color: #ccc;
+}
+
+.controlPanel{
+    max-width: 700px;
+    border: 2px solid grey;
+    background-color: #fff;
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    padding: 50px;
+}
+
+.controlPanelMove{
+    text-align: center;
+}
+
+.moveArrows{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.rightArrow i{
+    margin: 10px;
+    cursor: pointer;
+    color: #ff4336;
+}
+
+.rightArrow:active i{
+    transition: 500ms linear;
+    color: #2d8e2a;
+}
+
+
+.reglerPuissancePropulseur{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.rangePropulseur{
+    width: 200px;
+}
+
+.reglerPuissancePropulseur label{
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.reglerPuissancePropulseur label.affichagePropulseur{
+    font-size: 28px;
+    font-weight: 900;
+}
+
+.rocket i{
+    transform: rotate(45deg);
+}
+
+.blocRotate{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.rotateArrows{
+    display: flex;
+    flex-direction: column;
+}
