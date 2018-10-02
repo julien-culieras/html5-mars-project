@@ -1,7 +1,7 @@
 window.onload = function () {
 
-    /*
-     Elements serveur
+    /**
+     * Elements serveur
      */
     let puissancePropulseur = 0.5;
     let interval = null;
@@ -9,10 +9,15 @@ window.onload = function () {
     const timeMove = 100;
     const pasAngleRotation = 15;
     const angleBase = 45;
+    let userNameValue = null;
 
+    /**
+     * WS
+     */
+    //let serverUrl = 'mars.docker';
 
-    /*
-     Elements DOM
+    /**
+     * Elements DOM
      */
     const btnAvancer = document.getElementById('btnAvancer');
     const affichagePropulseur = document.getElementById('affichagePropulseur');
@@ -25,10 +30,6 @@ window.onload = function () {
     const overlay = document.getElementById('overlay');
     const btnValiderModal = document.getElementById('btnValiderModal');
     const userName = document.getElementById('userName');
-    const affichageUserName = document.getElementById('affichageUserName');
-    const role = document.getElementById('role');
-    const errorName = document.getElementById('errorName');
-
 
     initUser();
 
@@ -57,37 +58,11 @@ window.onload = function () {
         if (event.key === 'ArrowRight') stop();
     });
 
-    /*
-    ws.onmessage = (message) => {
-        const { name, data, error } = JSON.parse(message.data);
-        spaceshipData = data;
-
-
-        setValLeftPannel('spanLife', data.life);
-        setValLeftPannel('spanAngle', data.angle + ' °');
-        setValLeftPannel('spanTurnToAngle', data.turnTo + ' °');
-        setValLeftPannel('spanXPosition', Math.round(data.x));
-        setValLeftPannel('spanYPosition', Math.round(data.y));
-        setValLeftPannel('spanAngleTourelle', data.turretAngle + ' °');
-        setValLeftPannel('spanTurnToAngleTourelle', data.turretTurnTo + ' °');
-        setValLeftPannel('spanReloading', data.reloading ? 'Yes' : 'False');
-        setValLeftPannel('spanReloaded', data.reloaded ? 'Yes' : 'False');
-        setValLeftPannel('spanSystemHealth', Math.round(data.systemPower * 100) + ' %');
-        setValLeftPannel('spanShield', Math.round(data.shieldPower * 100) + ' %');
-        setValLeftPannel('spanThrusterPower', Math.round(data.systemPower * 100) + ' %');
-
-
-    };
-    */
-
 
     function avancer() {
         if (!interval){
             interval = setInterval(function () {
-                console.log('Avance 100ms');
-                /*
-                spaceship:move(timeMove, puissancePropulseur);
-                */
+                ws.sendToServer('spaceship:move', { time: timeMove, power: puissancePropulseur });
             }, timeMove)
         }
     }
@@ -96,13 +71,11 @@ window.onload = function () {
     function stop() {
         clearInterval(interval);
         interval = null;
-        console.log('Le vaisseaux s\'arrete');
     }
 
     function changePuissancePropulseur() {
         affichagePropulseur.innerText = rangePropulseur.value + ' / ' + rangePropulseur.getAttribute('max');
         puissancePropulseur = rangePropulseur.value/rangePropulseur.getAttribute('max');
-        console.log(puissancePropulseur)
     }
 
     function rotateUp() {
@@ -140,10 +113,7 @@ window.onload = function () {
 
         angleRotation = (angle - 45) % 360;
         affichageAngleRotation.innerText = angleRotation + ' °';
-        /*
-          spaceship:turnto(angleRotation);
-         */
-
+        ws.sendToServer('spaceship:turnto', { angle: angleRotation });
     }
 
     function initUser() {
@@ -162,6 +132,8 @@ window.onload = function () {
             modal.style.transition = '500ms linear';
             modal.style.display = 'none';
             overlay.style.display = 'none';
+
+            initServer();
         }
         else errorName.innerText = 'Veuillez entrer votre pseudo !';
 
@@ -169,9 +141,32 @@ window.onload = function () {
 
     function setValLeftPannel(idval, jsonVal){
         document.getElementById(idval).innerText = jsonVal;
-        console.log(jsonVal);
     }
 
+    function initServer() {
+        let serverUrl = '92.222.88.16:9090';
+        const ws = new WebSocket(`ws://${serverUrl}?team=1&username=${userNameValue}&job=Pilot`);
+
+        ws.sendToServer = function(name, data) {
+            const message = JSON.stringify({ name, data });
+            this.send(message);
+        };
+
+        ws.onmessage = (message) => {
+            const { name, data, error } = JSON.parse(message.data);
+
+            setValLeftPannel('spanLife', data.life);
+            setValLeftPannel('spanAngle', data.angle + ' °');
+            setValLeftPannel('spanTurnToAngle', data.turnTo + ' °');
+            setValLeftPannel('spanXPosition', Math.round(data.x));
+            setValLeftPannel('spanYPosition', Math.round(data.y));
+            setValLeftPannel('spanAngleTourelle', data.turretAngle + ' °');
+            setValLeftPannel('spanTurnToAngleTourelle', data.turretTurnTo + ' °');
+            setValLeftPannel('spanReloading', data.reloading ? 'Yes' : 'False');
+            setValLeftPannel('spanReloaded', data.reloaded ? 'Yes' : 'False');
+            setValLeftPannel('spanSystemHealth', Math.round(data.systemPower * 100) + ' %');
+            setValLeftPannel('spanShield', Math.round(data.shieldPower * 100) + ' %');
+            setValLeftPannel('spanThrusterPower', Math.round(data.systemPower * 100) + ' %');
+        };
+    }
 };
-
-

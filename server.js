@@ -22,6 +22,10 @@ app.get('/controller', (req, res) => {
     res.sendFile(__dirname + '/controller.html', 'controller.html', 'text/html', false);
 });
 
+app.get('/controller/pilot', (req, res) => {
+    res.sendFile(__dirname + '/controller/pilot.html', 'pilot.html', 'text/html', false);
+});
+
 const wss = new Server({ server: httpServer });
 
 /**
