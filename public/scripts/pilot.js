@@ -6,7 +6,7 @@ window.onload = function () {
     let puissancePropulseur = 0.5;
     let interval = null;
     let angleRotation = 0;
-    const timeMove = 100;
+    const timeMove = 300;
     const pasAngleRotation = 15;
     const angleBase = 45;
     let userNameValue = null;
@@ -15,6 +15,30 @@ window.onload = function () {
      * WS
      */
     //let serverUrl = 'mars.docker';
+    let serverUrl = 'localhost:8080';
+    const ws = new WebSocket(`ws://${serverUrl}?team=1&username=${userNameValue}&job=Pilot`);
+
+    ws.sendToServer = function(name, data) {
+        const message = JSON.stringify({ name, data });
+        this.send(message);
+    };
+
+    ws.onmessage = (message) => {
+        const { name, data, error } = JSON.parse(message.data);
+
+        setValLeftPannel('spanLife', data.life);
+        setValLeftPannel('spanAngle', data.angle + ' °');
+        setValLeftPannel('spanTurnToAngle', data.turnTo + ' °');
+        setValLeftPannel('spanXPosition', Math.round(data.x));
+        setValLeftPannel('spanYPosition', Math.round(data.y));
+        setValLeftPannel('spanAngleTourelle', data.turretAngle + ' °');
+        setValLeftPannel('spanTurnToAngleTourelle', data.turretTurnTo + ' °');
+        setValLeftPannel('spanReloading', data.reloading ? 'Yes' : 'False');
+        setValLeftPannel('spanReloaded', data.reloaded ? 'Yes' : 'False');
+        setValLeftPannel('spanSystemHealth', Math.round(data.systemPower * 100) + ' %');
+        setValLeftPannel('spanShield', Math.round(data.shieldPower * 100) + ' %');
+        setValLeftPannel('spanThrusterPower', Math.round(data.systemPower * 100) + ' %');
+    };
 
     /**
      * Elements DOM
@@ -133,7 +157,7 @@ window.onload = function () {
             modal.style.display = 'none';
             overlay.style.display = 'none';
 
-            initServer();
+           // initServer();
         }
         else errorName.innerText = 'Veuillez entrer votre pseudo !';
 
@@ -144,29 +168,6 @@ window.onload = function () {
     }
 
     function initServer() {
-        let serverUrl = '92.222.88.16:9090';
-        const ws = new WebSocket(`ws://${serverUrl}?team=1&username=${userNameValue}&job=Pilot`);
 
-        ws.sendToServer = function(name, data) {
-            const message = JSON.stringify({ name, data });
-            this.send(message);
-        };
-
-        ws.onmessage = (message) => {
-            const { name, data, error } = JSON.parse(message.data);
-
-            setValLeftPannel('spanLife', data.life);
-            setValLeftPannel('spanAngle', data.angle + ' °');
-            setValLeftPannel('spanTurnToAngle', data.turnTo + ' °');
-            setValLeftPannel('spanXPosition', Math.round(data.x));
-            setValLeftPannel('spanYPosition', Math.round(data.y));
-            setValLeftPannel('spanAngleTourelle', data.turretAngle + ' °');
-            setValLeftPannel('spanTurnToAngleTourelle', data.turretTurnTo + ' °');
-            setValLeftPannel('spanReloading', data.reloading ? 'Yes' : 'False');
-            setValLeftPannel('spanReloaded', data.reloaded ? 'Yes' : 'False');
-            setValLeftPannel('spanSystemHealth', Math.round(data.systemPower * 100) + ' %');
-            setValLeftPannel('spanShield', Math.round(data.shieldPower * 100) + ' %');
-            setValLeftPannel('spanThrusterPower', Math.round(data.systemPower * 100) + ' %');
-        };
     }
 };
