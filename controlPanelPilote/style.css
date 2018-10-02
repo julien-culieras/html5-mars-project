@@ -55,8 +55,12 @@ body{
     font-weight: 900;
 }
 
-.rocket i{
+#rocketIcon{
     transform: rotate(45deg);
+}
+
+.rocket{
+    margin-right: 20px;
 }
 
 .blocRotate{
@@ -69,4 +73,17 @@ body{
 .rotateArrows{
     display: flex;
     flex-direction: column;
+    margin-left: 20px;
+}
+
+.rotateArrows i{
+    cursor: pointer;
+}
+
+#btnRotateUp:active{
+    color: #2d8e2a;
+}
+
+#btnRotateDown:active{
+    color: #2d8e2a;
 }
