@@ -9,6 +9,7 @@ window.onload = function () {
     const timeMove = 100;
     const pasAngleRotation = 15;
     const angleBase = 45;
+    let userNameValue = null;
 
     /*
      Elements DOM
@@ -19,11 +20,17 @@ window.onload = function () {
     const btnRotateUp = document.getElementById('btnRotateUp');
     const btnRotateDown = document.getElementById('btnRotateDown');
     const rocket = document.getElementById('rocketIcon');
+    const affichageAngleRotation = document.getElementById('affichageAngleRotation');
+    const modal = document.getElementById('modal');
+    const overlay = document.getElementById('overlay');
+    const btnValiderModal = document.getElementById('btnValiderModal');
+    const userName = document.getElementById('userName');
+
+    initUser();
 
     let oldRotate = rocket.style;
-    console.log(oldRotate);
-
     changePuissancePropulseur();
+
 
     btnAvancer.addEventListener('mousedown', avancer);
     btnAvancer.addEventListener('mouseup', stop);
@@ -31,6 +38,9 @@ window.onload = function () {
 
     btnRotateUp.addEventListener('click', rotateUp);
     btnRotateDown.addEventListener('click', rotateDown);
+
+    btnValiderModal.addEventListener('click', closeModal);
+
 
 
     document.addEventListener('keydown', (event) => {
@@ -90,20 +100,41 @@ window.onload = function () {
             angle = oldRotate - pasAngleRotation;
             newRotate = "rotate(" + angle + "deg)";
             rocket.style.transform = newRotate;
+
         }
         else{
             angle = oldRotate + pasAngleRotation;
             newRotate = "rotate(" + angle + "deg)";
             rocket.style.transform = newRotate;
+
         }
 
-        angleRotation = angle - 45;
 
+
+        angleRotation = (angle - 45) % 360;
+        affichageAngleRotation.innerText = angleRotation + ' °';
         /*
           spaceship:turnto(angleRotation);
          */
 
     }
+
+    function initUser() {
+        modal.style.transition = '500ms linear';
+        modal.style.display = 'block';
+        overlay.style.display = 'block';
+    }
+
+    function closeModal() {
+        userNameValue = userName.value;
+        
+
+        modal.style.transition = '500ms linear';
+        modal.style.display = 'none';
+        overlay.style.display = 'none';
+    }
+
+
 };
 
 

@@ -3,13 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Panneau de controle</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
 </head>
 <body>
 
+<div id="overlay"></div>
+
 <div class="controlPanel">
-    <h1>Panneau de controle du vaisseaux spacial !</h1>
+    <h1>Panneau de controle du vaisseau spacial !</h1>
 
     <hr>
 
@@ -39,6 +43,9 @@
         <h2>Rotation</h2>
 
         <div class="blocRotate">
+            <div>
+                <span id="affichageAngleRotation">0 °</span>
+            </div>
             <div class="rocket">
                 <i id="rocketIcon" class="fas fa-rocket fa-6x"></i>
             </div>
@@ -50,10 +57,22 @@
                     <i id="btnRotateDown" class="fas fa-arrow-down fa-4x"></i>
                 </div>
             </div>
+        </div>
+    </div>
 
+    <div class="modal" id="modal">
+        <div class="form-group">
+            <label for="userName">Votre nom</label>
+            <input id="userName" class="form-control" type="text">
+        </div>
+        <div class="form-group">
+            <label for="avatar">Votre avatar</label>
+            <input id="avatar" class="form-control" type="text">
         </div>
 
+        <button id="btnValiderModal" class="btn btn-primary">Valider</button>
     </div>
+
 </div>
 
 </body>
