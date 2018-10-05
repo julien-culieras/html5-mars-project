@@ -69,8 +69,67 @@ window.onload = function()
         else if (event.key === 'r') fire100();
     });
 
+    window.addEventListener("gamepadconnected", function(e)
+    {
+      const gamepad = e.gamepad;
+      console.log(gamepad);
+      setInterval(function()
+      {
+        gamepad.buttons.forEach(function(button, index)
+        {
+          if (button.pressed)
+          {
+            console.log(`button ${index} pressed ${button.value}`);
+            if (index == 0)
+            {
+              fire25();
+            }
+
+            else if (index == 1)
+            {
+              fire50();
+            }
+
+            else if (index == 2)
+            {
+              fire75();
+            }
+
+            else if (index == 3)
+            {
+              fire100();
+            }
+
+            else if (index == 14)
+            {
+              rotateLeft();
+            }
+
+            else if (index == 15)
+            {
+              rotateRight();
+            }
+
+            else if (index == 12)
+            {
+              turnToZero();
+            }
+
+            else if (index == 13)
+            {
+              turnToZero();
+            }
+
+            else if (index == 7)
+            {
+              move();
+            }
 
 
+          }
+        });
+      }, 100);
+    });
 
     // Call the modal requesting the user name and his role
     function initModal()
@@ -181,7 +240,12 @@ window.onload = function()
     {
         console.log('Firing at 100% !');
         ws.send(JSON.stringify({ name: 'spaceship:turret:fire', data: { power: 1 }}));
-        ws.send(JSON.stringify({ name: 'spaceship:move', data: { time: 5000, power: 1 }})); // Move spaceship for 1s
+        // ws.send(JSON.stringify({ name: 'spaceship:move', data: { time: 5000, power: 1 }})); // Move spaceship for 1s
+    }
+
+    function move()
+    {
+      ws.send(JSON.stringify({ name: 'spaceship:move', data: { time: 5000, power: 1 }})); // Move spaceship for 1s
     }
 
 
