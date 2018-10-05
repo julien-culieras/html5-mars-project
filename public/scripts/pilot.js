@@ -6,7 +6,7 @@ window.onload = function () {
     let puissancePropulseur = 0.5;
     let interval = null;
     let angleRotation = 0;
-    const timeMove = 100;
+    const timeMove = 300;
     const pasAngleRotation = 15;
     const angleBase = 45;
     let userNameValue = null;
@@ -15,7 +15,7 @@ window.onload = function () {
      * WS
      */
     //let serverUrl = 'mars.docker';
-    let serverUrl = '92.222.88.16:9090';
+    let serverUrl = 'localhost:8080';
     const ws = new WebSocket(`ws://${serverUrl}?team=1&username=${userNameValue}&job=Pilot`);
 
     ws.sendToServer = function(name, data) {
@@ -156,6 +156,8 @@ window.onload = function () {
             modal.style.transition = '500ms linear';
             modal.style.display = 'none';
             overlay.style.display = 'none';
+
+           // initServer();
         }
         else errorName.innerText = 'Veuillez entrer votre pseudo !';
 
