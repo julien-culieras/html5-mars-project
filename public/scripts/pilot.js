@@ -44,8 +44,9 @@ window.onload = function () {
      * WS
      */
 
-    let serverUrl = 'mars.docker';
+    //let serverUrl = 'mars.docker';
     //let serverUrl = 'localhost:8080';
+    let serverUrl = '92.222.88.16:9090';
     let ws = null;
 
     initModal();
