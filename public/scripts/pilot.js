@@ -1,5 +1,8 @@
 window.onload = function () {
 
+    // TODO: Pouvoir modifier sa team
+    // TODO: avatar
+
     /**
      * Elements serveur
      */
@@ -26,8 +29,11 @@ window.onload = function () {
     ws.onmessage = (message) => {
         const { name, data, error } = JSON.parse(message.data);
 
-        setValLeftPannel('spanLife', data.life);
+        rocket.style.transform = "rotate(" + (data.angle + angleBase) + "deg)";
+        affichageAngleRotation.innerText = data.angle + ' °';
+
         setValLeftPannel('spanAngle', data.angle + ' °');
+        setValLeftPannel('spanLife', data.life);
         setValLeftPannel('spanTurnToAngle', data.turnTo + ' °');
         setValLeftPannel('spanXPosition', Math.round(data.x));
         setValLeftPannel('spanYPosition', Math.round(data.y));
@@ -56,18 +62,17 @@ window.onload = function () {
     const userName = document.getElementById('userName');
 
     initUser();
-
-    let oldRotate = rocket.style;
     changePuissancePropulseur();
 
 
+    /**
+     * Events DOM
+     */
     btnAvancer.addEventListener('mousedown', avancer);
     btnAvancer.addEventListener('mouseup', stop);
     rangePropulseur.addEventListener('change', changePuissancePropulseur);
-
     btnRotateUp.addEventListener('click', rotateUp);
     btnRotateDown.addEventListener('click', rotateDown);
-
     btnValiderModal.addEventListener('click', closeModal);
 
 
@@ -111,33 +116,9 @@ window.onload = function () {
     }
 
     function rotate(type) {
-        let oldRotate = rocket.style.transform;
-        let newRotate = null;
-        let angle = null;
+        let wayRotate = (type === 'down') ? -1 : 1;
 
-        if (!oldRotate) oldRotate = angleBase;
-        else oldRotate = oldRotate.substring(oldRotate.indexOf("(") + 1, oldRotate.indexOf("deg"));
-
-        oldRotate = Number(oldRotate);
-
-        if (type === 'down'){
-            angle = oldRotate - pasAngleRotation;
-            newRotate = "rotate(" + angle + "deg)";
-            rocket.style.transform = newRotate;
-
-        }
-        else{
-            angle = oldRotate + pasAngleRotation;
-            newRotate = "rotate(" + angle + "deg)";
-            rocket.style.transform = newRotate;
-
-        }
-
-
-
-        angleRotation = (angle - 45) % 360;
-        affichageAngleRotation.innerText = angleRotation + ' °';
-        ws.sendToServer('spaceship:turnto', { angle: angleRotation });
+        ws.sendToServer('spaceship:rotate', { angle: pasAngleRotation, direction: wayRotate });
     }
 
     function initUser() {
