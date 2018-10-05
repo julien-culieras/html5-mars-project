@@ -25,9 +25,13 @@ Si vous préférez utiliser les touches de votre clavier afin de contrôler le v
 * "+" : Augmenter la puissance des propulseurs
 * "-" : Diminuer la puissance des propulseurs
 
+Go to [http://localhost:8080/controller/pilot](http://localhost:8080/controller/pilot)
+
 ## Artilleur
 
 Le dashboard de l'artilleur se compose d'une interface d'information sur l'état du vaisseau (partie gauche) et d'un centre de commande de la tourelle. Celui-ci se compose de deux panneaux :
 - Le premier permet de contrôler la tourelle
 
 - Le second permet de contrôler le tir de la tourelle
+
+Go to [http://localhost:8080/controller/turret](http://localhost:8080/controller/turret)
