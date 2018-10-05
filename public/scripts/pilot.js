@@ -44,8 +44,9 @@ window.onload = function () {
      * WS
      */
 
-    let serverUrl = 'mars.docker';
+    //let serverUrl = 'mars.docker';
     //let serverUrl = 'localhost:8080';
+    let serverUrl = '92.222.88.16:9090';
     let ws = null;
 
     initModal();
@@ -130,7 +131,7 @@ window.onload = function () {
     }
 
     function rotate(event) {
-        let wayRotate = (event === 'down' || (event.srcElement !== undefined && event.srcElement.getAttribute('data-move') === 'down')) ? -1 : 1;
+        let wayRotate = (event === 'down' || (event.srcElement !== undefined && event.srcElement.getAttribute('data-move') === 'down')) ? 1 : -1;
         ws.sendToServer('spaceship:rotate', { angle: pasAngleRotation, direction: wayRotate });
     }
 
