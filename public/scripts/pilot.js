@@ -94,6 +94,8 @@ window.onload = function () {
                 if (event.key === 'ArrowRight') avancer();
                 else if (event.key === 'ArrowUp') rotate('up');
                 else if (event.key === 'ArrowDown') rotate('down');
+                else if (event.key === '+') addPuissancePropulseur(1);
+                else if (event.key === '-') addPuissancePropulseur(-1);
             });
 
             document.addEventListener('keyup', (event) => {
@@ -120,6 +122,11 @@ window.onload = function () {
     function changePuissancePropulseur() {
         affichagePropulseur.innerText = rangePropulseur.value + ' / ' + rangePropulseur.getAttribute('max');
         puissancePropulseur = rangePropulseur.value/rangePropulseur.getAttribute('max');
+    }
+
+    function addPuissancePropulseur(puissance) {
+        rangePropulseur.value = parseInt(rangePropulseur.value) + puissance;
+        changePuissancePropulseur();
     }
 
     function rotate(event) {
