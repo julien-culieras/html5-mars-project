@@ -2,15 +2,15 @@
 @font-face
 {
     font-family: 'spacefont';
-    src: url('../font/Mars_Mission.otf');
-    src: url('../font/Mars_Mission.png');
-    src: url('../font/Mars_Mission.ttf');
+    src: url('font/Mars_Mission.otf');
+    src: url('font/Mars_Mission.png');
+    src: url('font/Mars_Mission.ttf');
 }
 
 /*  _ _ _ _ _ _ _ _ _ _ GENERAL _ _ _ _ _ _ _ _ _ _ */
 body
 {
-  background-image: url("../img/background.jpg");
+  background-image: url("/public/images/background_turret.jpg");
 }
 
 h1, h2, h3, footer p, #displayInfo
