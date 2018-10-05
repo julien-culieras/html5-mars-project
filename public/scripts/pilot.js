@@ -37,23 +37,8 @@ window.onload = function () {
     /**
      * Events DOM
      */
-    btnAvancer.addEventListener('mousedown', avancer);
-    btnAvancer.addEventListener('mouseup', stop);
     rangePropulseur.addEventListener('change', changePuissancePropulseur);
-    btnRotateUp.addEventListener('click', rotateUp);
-    btnRotateDown.addEventListener('click', rotateDown);
     btnValiderModal.addEventListener('click', closeModal);
-
-    document.addEventListener('keydown', (event) => {
-        if (event.key === 'ArrowRight') avancer();
-        else if (event.key === 'ArrowUp') rotateUp();
-        if (event.key === 'ArrowDown') rotateDown();
-    });
-
-    document.addEventListener('keyup', (event) => {
-        if (event.key === 'ArrowRight') stop();
-    });
-
 
     /**
      * WS
@@ -63,7 +48,7 @@ window.onload = function () {
     //let serverUrl = 'localhost:8080';
     let ws = null;
 
-    initUser();
+    initModal();
     changePuissancePropulseur();
 
     function initController(teamId, username, avatar) {
@@ -96,7 +81,26 @@ window.onload = function () {
 
         ws.onopen = (state) => {
             ws.sendToServer('user:avatar', { avatar: avatar });
+
+            /**
+             * Events Server
+             */
+            btnAvancer.addEventListener('mousedown', avancer);
+            btnAvancer.addEventListener('mouseup', stop);
+            btnRotateUp.addEventListener('click', rotate);
+            btnRotateDown.addEventListener('click', rotate);
+
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'ArrowRight') avancer();
+                else if (event.key === 'ArrowUp') rotate('up');
+                else if (event.key === 'ArrowDown') rotate('down');
+            });
+
+            document.addEventListener('keyup', (event) => {
+                if (event.key === 'ArrowRight') stop();
+            });
         }
+
     }
 
     function avancer() {
@@ -118,20 +122,12 @@ window.onload = function () {
         puissancePropulseur = rangePropulseur.value/rangePropulseur.getAttribute('max');
     }
 
-    function rotateUp() {
-        rotate('down');
-    }
-
-    function rotateDown() {
-        rotate('up');
-    }
-
-    function rotate(type) {
-        let wayRotate = (type === 'down') ? -1 : 1;
+    function rotate(event) {
+        let wayRotate = (event === 'down' || (event.srcElement !== undefined && event.srcElement.getAttribute('data-move') === 'down')) ? -1 : 1;
         ws.sendToServer('spaceship:rotate', { angle: pasAngleRotation, direction: wayRotate });
     }
 
-    function initUser() {
+    function initModal() {
         modal.classList.add('show');
         overlay.classList.add('show');
     }
@@ -141,30 +137,21 @@ window.onload = function () {
         let avatarValue = avatar.value;
 
         if (userNameValue && avatarValue) {
-            let roleValue = role.value;
-
-            affichageUserName.innerText = 'Bienvenue ' + userNameValue + ', notre ' + roleValue + ' !';
+            affichageUserName.innerText = 'Bienvenue ' + userNameValue + ', notre ' + role.value + ' !';
 
             reader.onload = function() {
                 avatarAffichage.setAttribute('src', reader.result);
-                initController(teamId, userNameValue, reader.result);
+                initController(team.value, userNameValue, reader.result);
             };
             reader.readAsDataURL(avatar.files[0]);
-
-            let teamId = team.value;
 
             modal.classList.remove('show');
             modal.classList.add('hidden');
             overlay.classList.remove('show');
             overlay.classList.add('hidden');
-
-
-        }
-        else {
-            if (!userNameValue) errorName.innerText = 'Veuillez entrer votre pseudo !';
-            else errorName.innerText = '';
-            if (!avatarValue) errorAvatar.innerText = 'Veuillez choisir votre avatar !';
-            else errorAvatar.innerText = '';
+        } else {
+            errorName.innerText = (!userNameValue) ? 'Veuillez entrer votre pseudo !' : '';
+            errorAvatar.innerText = (!avatarValue) ? 'Veuillez choisir votre avatar !' : '';
         }
 
     }
