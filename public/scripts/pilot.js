@@ -131,7 +131,7 @@ window.onload = function () {
     }
 
     function rotate(event) {
-        let wayRotate = (event === 'down' || (event.srcElement !== undefined && event.srcElement.getAttribute('data-move') === 'down')) ? -1 : 1;
+        let wayRotate = (event === 'down' || (event.srcElement !== undefined && event.srcElement.getAttribute('data-move') === 'down')) ? 1 : -1;
         ws.sendToServer('spaceship:rotate', { angle: pasAngleRotation, direction: wayRotate });
     }
 
