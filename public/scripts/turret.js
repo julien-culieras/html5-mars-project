@@ -151,8 +151,7 @@ window.onload = function()
     // Connect with the websocket
     function wsConnection ()
     {
-      // const url = '92.222.88.16:9090';
-      const url = 'localhost:8080';
+      const url = '92.222.88.16:9090';
       const team = 4;
       const user = username.value;
       const job = roleList.value;
