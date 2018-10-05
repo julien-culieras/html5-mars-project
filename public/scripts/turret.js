@@ -35,6 +35,8 @@ window.onload = function()
 
     var ws;
 
+    var gp;
+
     // - - - - - - - - - - -  PROGRAM - - - - - - - - - - -
 
     initModal();  // Display the modal on page loading
@@ -52,6 +54,22 @@ window.onload = function()
     btnFire50.addEventListener('click', fire50);
     btnFire75.addEventListener('click', fire75);
     btnFire100.addEventListener('click', fire100);
+
+    // Gestion keyboard keys
+    document.addEventListener('keydown', (event) =>
+    {
+        console.log(event.key);
+        if (event.key === 'ArrowRight') rotateRight();
+        else if (event.key === 'ArrowLeft') rotateLeft();
+        else if (event.key === 'ArrowUp') turnToZero();
+        else if (event.key === 'ArrowDown') turnOver();
+        else if (event.key === 'a') fire25();
+        else if (event.key === 'z') fire50();
+        else if (event.key === 'e') fire75();
+        else if (event.key === 'r') fire100();
+    });
+
+
 
 
     // Call the modal requesting the user name and his role
@@ -74,7 +92,8 @@ window.onload = function()
     // Connect with the websocket
     function wsConnection ()
     {
-      const url = '92.222.88.16:9090';
+      // const url = '92.222.88.16:9090';
+      const url = 'localhost:8080';
       const team = 4;
       const user = username.value;
       const job = roleList.value;
@@ -162,7 +181,7 @@ window.onload = function()
     {
         console.log('Firing at 100% !');
         ws.send(JSON.stringify({ name: 'spaceship:turret:fire', data: { power: 1 }}));
-        // ws.send(JSON.stringify({ name: 'spaceship:move', data: { time: 5000, power: 1 }})); // Move spaceship for 1s
+        ws.send(JSON.stringify({ name: 'spaceship:move', data: { time: 5000, power: 1 }})); // Move spaceship for 1s
     }
 
 
