@@ -32,7 +32,10 @@
         <p>THRUSTER POWER : <span id="spanThrusterPower" class="spanShowInfo"></span></p>
     </div>
     <div class="controlPanel">
-        <h1 id="affichageUserName"></h1>
+        <div class="containerUserName">
+            <h1 id="affichageUserName"></h1>
+            <img id="avatarAffichage" alt="avatar">
+        </div>
 
         <hr>
 
@@ -85,6 +88,15 @@
 
     <div class="modal" id="modal">
         <div class="form-group">
+            <label class="required" for="team">Votre équipe</label>
+            <select id="team" class="form-control">
+                <option value="1">Equipe 1</option>
+                <option value="2">Equipe 2</option>
+                <option value="3">Equipe 3</option>
+                <option value="4">Equipe 4</option>
+            </select>
+        </div>
+        <div class="form-group">
             <label class="required" for="userName">Votre nom</label>
             <input id="userName" class="form-control" type="text">
             <span id="errorName"></span>
@@ -97,6 +109,11 @@
                 <option value="Ingénieur de la nasa">Ingénieur de la nasa</option>
                 <option value="Capitaine de navire">Capitaine de navire</option>
             </select>
+        </div>
+        <div class="form-group">
+            <label class="required" for="avatar">Votre avatar</label>
+            <input id="avatar" class="form-control" type="file">
+            <span id="errorAvatar"></span>
         </div>
 
 

@@ -60,6 +60,14 @@ window.onload = function () {
     const overlay = document.getElementById('overlay');
     const btnValiderModal = document.getElementById('btnValiderModal');
     const userName = document.getElementById('userName');
+    const role = document.getElementById('role');
+    const avatar = document.getElementById('avatar');
+    const team = document.getElementById('team');
+    const affichageUserName = document.getElementById('affichageUserName');
+    const errorName = document.getElementById('errorName');
+    const errorAvatar = document.getElementById('errorAvatar');
+    const reader = new FileReader();
+    const avatarAffichage = document.getElementById('avatarAffichage');
 
     initUser();
     changePuissancePropulseur();
@@ -129,10 +137,22 @@ window.onload = function () {
 
     function closeModal() {
         let userNameValue = userName.value;
+        let avatarValue = avatar.value;
 
-        if (userNameValue) {
+        if (userNameValue && avatarValue) {
             let roleValue = role.value;
+
             affichageUserName.innerText = 'Bienvenue ' + userNameValue + ', notre ' + roleValue + ' !';
+
+            reader.onload = function() {
+                console.log(reader.result);
+                avatarAffichage.setAttribute('src', reader.result);
+                ws.sendToServer('user:avatar', { avatar: reader.result });
+            };
+            reader.readAsDataURL(avatar.files[0]);
+
+            let teamId = team.value;
+
 
             modal.style.transition = '500ms linear';
             modal.style.display = 'none';
@@ -140,7 +160,12 @@ window.onload = function () {
 
            // initServer();
         }
-        else errorName.innerText = 'Veuillez entrer votre pseudo !';
+        else {
+            if (!userNameValue) errorName.innerText = 'Veuillez entrer votre pseudo !';
+            else errorName.innerText = '';
+            if (!avatarValue) errorAvatar.innerText = 'Veuillez choisir votre avatar !';
+            else errorAvatar.innerText = '';
+        }
 
     }
 
