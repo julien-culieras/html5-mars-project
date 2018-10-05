@@ -1,15 +1,12 @@
 window.onload = function () {
 
-    // TODO: Pouvoir modifier sa team
-    // TODO: avatar
-
     /**
      * Elements serveur
      */
     let puissancePropulseur = 0.5;
     let interval = null;
     let angleRotation = 0;
-    const timeMove = 300;
+    const timeMove = 500;
     const pasAngleRotation = 15;
     const angleBase = 45;
     let userNameValue = null;
@@ -69,8 +66,8 @@ window.onload = function () {
     initUser();
     changePuissancePropulseur();
 
-    function initController(data) {
-        const ws = new WebSocket(`ws://${serverUrl}?team=1&username=${userNameValue}&job=Pilot`);
+    function initController(teamId, username, avatar) {
+        ws = new WebSocket(`ws://${serverUrl}?team=${teamId}&username=${username}&job=Pilot`);
 
         ws.sendToServer = function(name, data) {
             const message = JSON.stringify({ name, data });
@@ -96,6 +93,10 @@ window.onload = function () {
             setValLeftPannel('spanShield', Math.round(data.shieldPower * 100) + ' %');
             setValLeftPannel('spanThrusterPower', Math.round(data.systemPower * 100) + ' %');
         };
+
+        ws.onopen = (state) => {
+            ws.sendToServer('user:avatar', { avatar: avatar });
+        }
     }
 
     function avancer() {
@@ -133,8 +134,6 @@ window.onload = function () {
     function initUser() {
         modal.classList.add('show');
         overlay.classList.add('show');
-
-        init
     }
 
     function closeModal() {
@@ -147,18 +146,19 @@ window.onload = function () {
             affichageUserName.innerText = 'Bienvenue ' + userNameValue + ', notre ' + roleValue + ' !';
 
             reader.onload = function() {
-                console.log(reader.result);
                 avatarAffichage.setAttribute('src', reader.result);
-                ws.sendToServer('user:avatar', { avatar: reader.result });
+                initController(teamId, userNameValue, reader.result);
             };
             reader.readAsDataURL(avatar.files[0]);
 
             let teamId = team.value;
 
             modal.classList.remove('show');
+            modal.classList.add('hidden');
             overlay.classList.remove('show');
+            overlay.classList.add('hidden');
 
-           // initController(data);
+
         }
         else {
             if (!userNameValue) errorName.innerText = 'Veuillez entrer votre pseudo !';
