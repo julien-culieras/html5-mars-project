@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang='fr'>
+<head>
+    <meta charset='UTF-8' />
+    <meta http-equiv='x-ua-compatible' content='ie=edge' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!-- Own css -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <title>Spaceship Control Panel</title>
+</head>
+<body>
+  <div class="container">
+
+    <div class="row justify-content-between">
+      <!--  _ _ _ _ _ _ _ _ _ _ ASIDE _ _ _ _ _ _ _ _ _ _ -->
+      <aside class="col-2" id="info_panel">
+        <h2>SPACESHIP</h2>
+        <p>LIFE/100 : <span id="spanLife" class="spanShowInfo"></span></p>
+        <p>ANGLE : <span id="spanAngle" class="spanShowInfo"></span></p>
+        <p>TURN TO ANGLE : <span id="spanTurnToAngle" class="spanShowInfo"></span></p>
+        <p>X POSITION : <span id="spanXPosition" class="spanShowInfo"></span></p>
+        <p>Y POSITION : <span id="spanYPosition" class="spanShowInfo"></span></p>
+
+        <h2>TURRET</h2>
+        <p>ANGLE : <span id="spanAngleTourelle" class="spanShowInfo"></span></p>
+        <p>TURN TO ANGLE : <span id="spanTurnToAngleTourelle" class="spanShowInfo"></span></p>
+        <p>RELOADING : <span id="spanReloading" class="spanShowInfo"></span></p>
+        <p>RELOADED : <span id="spanReloaded" class="spanShowInfo"></span></p>
+
+        <h2>ENERGY</h2>
+        <p>SYSTEM (HEALTH) : <span id="spanSystemHealth" class="spanShowInfo"></span></p>
+        <p>SHIELD : <span id="spanShield" class="spanShowInfo"></span></p>
+        <p>THRUSTER POWER : <span id="spanThrusterPower" class="spanShowInfo"></span></p>
+      </aside>
+
+      <!--  _ _ _ _ _ _ _ _ _ _ SECTION _ _ _ _ _ _ _ _ _ _ -->
+      <section class="col-9" id="fire_actions">
+
+          <!-- Main Page Title -->
+          <h1 class=" display-1 text-center">FIRE COMMANDS</h1>
+
+          <!-- Display user's informations (name & role) -->
+          <article class="container row justify-content-around lead text-center" id="displayInfo">
+            <div class="col-6">
+              <p>USERNAME : <span id="displayUserName"></span></p>
+            </div>
+            <div class="col-6">
+              <p>ROLE : <span id="displayRole"></span></p>
+            </div>
+          </article>
+
+          <div class="row justify-content-around mx-center">
+
+            <!-- _ _ _ _ _ ROTATION ACTION _ _ _ _ _ -->
+            <article id="rotate_action" class="col-12 col-sm-5">
+              <!-- Section Title -->
+              <div class="row">
+                <h3 class="h2 mx-auto">Rotate Action</h3>
+              </div>
+              <!-- Top Buttons' Row -->
+              <div class="row text-center">
+                <div class="col-6" id="rotate_btn_left">
+                  <button type="button" class="btn btn-lg btn-dark active"><i class="fas fa-arrow-left"></i>Left</button>
+                </div>
+                <div class="col-6" id="rotate_btn_right">
+                  <button type="button" class="btn btn-lg btn-dark active"><i class="fas fa-arrow-right"></i>Right</button>
+                </div>
+              </div>
+              <br>
+              <!-- Bottom Buttons' Row -->
+              <div class="row text-center">
+                <div class="col-6" id="rotate_btn_180">
+                  <button type="button" class="btn btn-lg btn-dark active"><i class="far fa-circle"></i>180°</button>
+                </div>
+                <div class="col-6" id="rotate_btn_0">
+                  <button type="button" class="btn btn-lg btn-dark active"><i class="far fa-circle"></i>0°</button>
+                </div>
+              </div>
+              <br />
+            </article> <!-- end div id="rotate_action"-->
+
+            <!-- _ _ _ _ _ FIRE ACTION _ _ _ _ _ -->
+            <article id="fire_action" class="col-12 col-sm-5">
+              <!-- Section Title -->
+              <div class="row">
+                <h3 class="h2 mx-auto">Fire Action</h3>
+              </div>
+              <!-- Top Buttons' Row -->
+              <div class="row text-center">
+                <div class="col-6" id="fire_btn_25">
+                  <button type="button" class="btn btn-lg btn-dark active"><i class="fas fa-fire"></i>25 %</button>
+                </div>
+                <div class="col-6" id="fire_btn_50">
+                  <button type="button" class="btn btn-lg btn-dark active"><i class="fas fa-fire"></i>50 %</button>
+                </div>
+              </div>
+              <br>
+              <!-- Bottom Buttons' Row -->
+              <div class="row text-center">
+                <div class="col-6" id="fire_btn_75">
+                  <button type="button" class="btn btn-lg btn-dark active"><i class="fas fa-fire"></i>75 %</button>
+                </div>
+                <div class="col-6" id="fire_btn_100">
+                  <button type="button" class="btn btn-lg btn-dark active"><i class="fas fa-fire"></i>100 %</button>
+                </div>
+              </div>
+              <br />
+            </article> <!-- end div id="fire_action"-->
+
+          </div> <!-- end row -->
+          <br />
+
+          <!-- Spaceship and Astrogirl Pictures -->
+          <div class="row">
+            <div id="planet" class="col-7 text-center">
+              <img src="img/planet.png" alt="astro-girl" width="300">
+            </div>
+            <div id="astrogirl" class="col-3 float-right">
+              <img src="img/astrogirl.png" alt="astro-girl" width="300">
+            </div>
+          </div>
+
+      </section>
+    </div> <!-- end row -->
+    <br />
+
+    <!--  _ _ _ _ _ _ _ _ _ _ FOOTER _ _ _ _ _ _ _ _ _ _ -->
+    <footer>
+      <div class="container">
+        <div class="row text-center">
+          <div class="col">
+            <p>Made by = Bento-Pereira David + Leo Bonin</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!--  _ _ _ _ _ _ _ _ _ _ MODALE _ _ _ _ _ _ _ _ _ _ -->
+    <div class="container" id="myModal">
+      <form id="modalForm">
+        <div class="form-group">
+          <label for="username">Username :</label>
+          <input type="text" class="form-control" id="username" placeholder="Username">
+        </div>
+        <div class="form-group">
+          <label for="roleList">Role :</label>
+          <select class="form-control" id="roleList">
+            <option>Pilote</option>
+            <option>Gunner</option>
+            <option>Ingineer</option>
+            <option>Captain</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="teamList">Team :</label>
+          <select class="form-control" id="teamList">
+            <option>Team 1</option>
+            <option>Team 2</option>
+            <option>Team 3</option>
+            <option>Team 4</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="avatar">Example file input</label>
+          <input type="file" class="form-control-file" id="avatar">
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>
+      </form>
+    </div>
+
+
+  </div> <!-- end general container -->
+
+  <div id="spaceship" class="">
+    <img src="img/spaceship.png" alt="astro-girl" width="500">
+  </div>
+
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+  <!-- Optional JavaScript -->
+  <script type="text/javascript" src="js/script.js"></script>
+
+</body>
+</html>
