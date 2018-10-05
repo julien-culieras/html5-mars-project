@@ -15,38 +15,6 @@ window.onload = function () {
     let userNameValue = null;
 
     /**
-     * WS
-     */
-    //let serverUrl = 'mars.docker';
-    let serverUrl = 'localhost:8080';
-    const ws = new WebSocket(`ws://${serverUrl}?team=1&username=${userNameValue}&job=Pilot`);
-
-    ws.sendToServer = function(name, data) {
-        const message = JSON.stringify({ name, data });
-        this.send(message);
-    };
-
-    ws.onmessage = (message) => {
-        const { name, data, error } = JSON.parse(message.data);
-
-        rocket.style.transform = "rotate(" + (data.angle + angleBase) + "deg)";
-        affichageAngleRotation.innerText = data.angle + ' °';
-
-        setValLeftPannel('spanAngle', data.angle + ' °');
-        setValLeftPannel('spanLife', data.life);
-        setValLeftPannel('spanTurnToAngle', data.turnTo + ' °');
-        setValLeftPannel('spanXPosition', Math.round(data.x));
-        setValLeftPannel('spanYPosition', Math.round(data.y));
-        setValLeftPannel('spanAngleTourelle', data.turretAngle + ' °');
-        setValLeftPannel('spanTurnToAngleTourelle', data.turretTurnTo + ' °');
-        setValLeftPannel('spanReloading', data.reloading ? 'Yes' : 'False');
-        setValLeftPannel('spanReloaded', data.reloaded ? 'Yes' : 'False');
-        setValLeftPannel('spanSystemHealth', Math.round(data.systemPower * 100) + ' %');
-        setValLeftPannel('spanShield', Math.round(data.shieldPower * 100) + ' %');
-        setValLeftPannel('spanThrusterPower', Math.round(data.systemPower * 100) + ' %');
-    };
-
-    /**
      * Elements DOM
      */
     const btnAvancer = document.getElementById('btnAvancer');
@@ -57,7 +25,7 @@ window.onload = function () {
     const rocket = document.getElementById('rocketIcon');
     const affichageAngleRotation = document.getElementById('affichageAngleRotation');
     const modal = document.getElementById('modal');
-    const overlay = document.getElementById('overlay');
+    const overlay = document.querySelector('.overlay');
     const btnValiderModal = document.getElementById('btnValiderModal');
     const userName = document.getElementById('userName');
     const role = document.getElementById('role');
@@ -69,10 +37,6 @@ window.onload = function () {
     const reader = new FileReader();
     const avatarAffichage = document.getElementById('avatarAffichage');
 
-    initUser();
-    changePuissancePropulseur();
-
-
     /**
      * Events DOM
      */
@@ -82,8 +46,6 @@ window.onload = function () {
     btnRotateUp.addEventListener('click', rotateUp);
     btnRotateDown.addEventListener('click', rotateDown);
     btnValiderModal.addEventListener('click', closeModal);
-
-
 
     document.addEventListener('keydown', (event) => {
         if (event.key === 'ArrowRight') avancer();
@@ -95,6 +57,46 @@ window.onload = function () {
         if (event.key === 'ArrowRight') stop();
     });
 
+
+    /**
+     * WS
+     */
+
+    let serverUrl = 'mars.docker';
+    //let serverUrl = 'localhost:8080';
+    let ws = null;
+
+    initUser();
+    changePuissancePropulseur();
+
+    function initController(data) {
+        const ws = new WebSocket(`ws://${serverUrl}?team=1&username=${userNameValue}&job=Pilot`);
+
+        ws.sendToServer = function(name, data) {
+            const message = JSON.stringify({ name, data });
+            this.send(message);
+        };
+
+        ws.onmessage = (message) => {
+            const { name, data, error } = JSON.parse(message.data);
+
+            rocket.style.transform = "rotate(" + (data.angle + angleBase) + "deg)";
+            affichageAngleRotation.innerText = data.angle + ' °';
+
+            setValLeftPannel('spanAngle', data.angle + ' °');
+            setValLeftPannel('spanLife', data.life);
+            setValLeftPannel('spanTurnToAngle', data.turnTo + ' °');
+            setValLeftPannel('spanXPosition', Math.round(data.x));
+            setValLeftPannel('spanYPosition', Math.round(data.y));
+            setValLeftPannel('spanAngleTourelle', data.turretAngle + ' °');
+            setValLeftPannel('spanTurnToAngleTourelle', data.turretTurnTo + ' °');
+            setValLeftPannel('spanReloading', data.reloading ? 'Yes' : 'False');
+            setValLeftPannel('spanReloaded', data.reloaded ? 'Yes' : 'False');
+            setValLeftPannel('spanSystemHealth', Math.round(data.systemPower * 100) + ' %');
+            setValLeftPannel('spanShield', Math.round(data.shieldPower * 100) + ' %');
+            setValLeftPannel('spanThrusterPower', Math.round(data.systemPower * 100) + ' %');
+        };
+    }
 
     function avancer() {
         if (!interval){
@@ -125,14 +127,14 @@ window.onload = function () {
 
     function rotate(type) {
         let wayRotate = (type === 'down') ? -1 : 1;
-
         ws.sendToServer('spaceship:rotate', { angle: pasAngleRotation, direction: wayRotate });
     }
 
     function initUser() {
-        modal.style.transition = '500ms linear';
-        modal.style.display = 'block';
-        overlay.style.display = 'block';
+        modal.classList.add('show');
+        overlay.classList.add('show');
+
+        init
     }
 
     function closeModal() {
@@ -153,12 +155,10 @@ window.onload = function () {
 
             let teamId = team.value;
 
+            modal.classList.remove('show');
+            overlay.classList.remove('show');
 
-            modal.style.transition = '500ms linear';
-            modal.style.display = 'none';
-            overlay.style.display = 'none';
-
-           // initServer();
+           // initController(data);
         }
         else {
             if (!userNameValue) errorName.innerText = 'Veuillez entrer votre pseudo !';
