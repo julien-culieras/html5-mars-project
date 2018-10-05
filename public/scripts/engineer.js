@@ -1,10 +1,10 @@
 const JOB = 'Engineer';
 const TEAM = 4;
 const USERNAME = 'EasyWidget';
-const ADDRESS = '92.222.88.16';
-//const ADDRESS = 'localhost';
-const PORT = '9090';
-//const PORT = '8080';
+//const ADDRESS = '92.222.88.16';
+const ADDRESS = 'localhost';
+//const PORT = '9090';
+const PORT = '8080';
 
 let g_life = 100;
 

@@ -89,7 +89,7 @@ class PowerWidget {
     const infos = document.createElement('div');
     infos.setAttribute('id', 'PUinfo');
     infos.innerHTML = `
-    <label>auto<input id="PUauto" type="checkbox" checked="true"/></label>
+    <label>auto<input id="PUauto" type="checkbox"/></label>
     <label>steps
     <input type="number" min="0.01" max="1" step="0.01" value="${g_steps}" />
     </label>
