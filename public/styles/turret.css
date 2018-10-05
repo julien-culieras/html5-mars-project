@@ -1,0 +1,116 @@
+/*  _ _ _ _ _ _ _ _ _ _ FONTS _ _ _ _ _ _ _ _ _ _ */
+@font-face
+{
+    font-family: 'spacefont';
+    src: url('../font/Mars_Mission.otf');
+    src: url('../font/Mars_Mission.png');
+    src: url('../font/Mars_Mission.ttf');
+}
+
+/*  _ _ _ _ _ _ _ _ _ _ GENERAL _ _ _ _ _ _ _ _ _ _ */
+body
+{
+  background-image: url("../img/background.jpg");
+}
+
+h1, h2, h3, footer p, #displayInfo
+{
+  color: #f4bc22;
+  text-shadow: 2px 3px #5b5b5b;
+  font-family: 'spacefont';
+}
+
+p
+{
+  color: white;
+}
+
+/*  _ _ _ _ _ _ _ _ _ _ ASIDE _ _ _ _ _ _ _ _ _ _ */
+aside
+{
+    border-style: solid;
+    border-color: white;
+    border-radius: 25px;
+    background-color: rgba(244, 188, 34, 0.5);
+    z-index: 1;
+}
+
+aside p
+{
+  color: #a6195e;
+  text-shadow: 1px 1px #ff0000;
+  font-weight: bold;
+}
+
+aside span
+{
+  color: white;
+}
+
+/*  _ _ _ _ _ _ _ _ _ _ SECTION _ _ _ _ _ _ _ _ _ _ */
+#fire_actions
+{
+  border-style: solid;
+  border-color: white;
+  border-radius: 25px;
+}
+
+#rotate_action, #fire_action
+{
+  background-color: rgba(244, 188, 34, 0.5);
+  border-style: solid;
+  border-radius: 25px;
+  color: #f4bc22;
+  font-family: 'spacefont';
+}
+
+#rotate_action button:hover
+{
+  color: #f4bc22;
+}
+
+#fire_action button:hover
+{
+  color: #ac3636;
+}
+
+/*  _ _ _ _ _ _ _ _ _ _ FOOTER _ _ _ _ _ _ _ _ _ _ */
+footer
+{
+  border-style: solid;
+  border-color: white;
+  border-radius: 25px;
+}
+
+footer p
+{
+    font-size:2em;
+}
+
+
+/*  _ _ _ _ _ _ _ _ _ _ PICTURE _ _ _ _ _ _ _ _ _ _ */
+#spaceship
+{
+  position: fixed;
+  bottom: 0;
+  z-index: 0;
+}
+
+/*  _ _ _ _ _ _ _ _ _ _ MODALE _ _ _ _ _ _ _ _ _ _ */
+#myModal
+{
+  display: none;
+
+  position: absolute;
+  left: 35%;
+  top: 10%;
+
+  max-width: 700px;
+  background-color: #fff;
+  border-radius: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 50px;
+  margin-top: 50px;
+  height: 450px;
+}
