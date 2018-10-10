@@ -1,7 +1,8 @@
 window.onload = function()
 {
-    // - - - - - - - - - - - VARIABLES - - - - - - - - - - -
-
+    // *****************************************************
+    //                       VARIABLES
+    // *****************************************************
     const btnRotateLeft = document.getElementById('rotate_btn_left');
     const btnRotateRight = document.getElementById('rotate_btn_right');
     const btnTurnToZero = document.getElementById('rotate_btn_0');
@@ -35,14 +36,14 @@ window.onload = function()
 
     var ws;
 
-    var gp;
-
-    // - - - - - - - - - - -  PROGRAM - - - - - - - - - - -
-
+    // *****************************************************
+    //                       PROGRAM
+    // *****************************************************
     initModal();  // Display the modal on page loading
 
-    // - - - - - - - - - - -  EVENEMENTS - - - - - - - - - - -
-
+    // *****************************************************
+    //                       EVENTS
+    // *****************************************************
     modalForm.addEventListener('submit', closeModal);
 
     btnRotateLeft.addEventListener('click', rotateLeft);
@@ -148,7 +149,7 @@ window.onload = function()
       e.preventDefault(); //Prevent from sending the form's data when clicking on the submit button
     }
 
-    // Connect with the websocket
+    // Connection with the websocket
     function wsConnection ()
     {
       const url = '92.222.88.16:9090';
@@ -156,10 +157,6 @@ window.onload = function()
       const user = username.value;
       const job = roleList.value;
       ws = new WebSocket(`ws://${url}?team=${team}&username=${user}&job=${job}`);
-      // ws = new WebSocket(`ws://92.222.88.16:9090?team=4&username=Bento&job=Gunner`);
-      console.log(ws);
-      console.log(`ws://${url}?team=${team}&username=${user}&job=${job}`);
-
 
       ws.onopen = function ()
       {
@@ -175,8 +172,8 @@ window.onload = function()
         spanLife.textContent = message.data.life;
         spanAngle.textContent = message.data.angle;
         spanTurnToAngle.textContent = message.data.turnTo;
-        spanXPosition.textContent = message.data.x;
-        spanYPosition.textContent = message.data.y;
+        spanXPosition.textContent = Math.round(message.data.x);
+        spanYPosition.textContent = Math.round(message.data.y);
         spanAngleTourelle.textContent = message.data.turretAngle;
         spanTurnToAngleTourelle.textContent = message.data.turretTurnTo;
         spanReloading.textContent = message.data.reloading;
