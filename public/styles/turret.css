@@ -55,7 +55,7 @@ aside span
   border-radius: 25px;
 }
 
-#rotate_action, #fire_action
+#rotate_action, #fire_action, #move_action
 {
   background-color: rgba(244, 188, 34, 0.5);
   border-style: solid;

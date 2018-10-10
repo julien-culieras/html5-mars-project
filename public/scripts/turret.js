@@ -13,6 +13,10 @@ window.onload = function()
     const btnFire75 = document.getElementById('fire_btn_75');
     const btnFire100 = document.getElementById('fire_btn_100');
 
+    const btnMoveUp = document.getElementById('btnMoveUp');
+    const btnMoveForward = document.getElementById('btnMoveForward');
+    const btnMoveDown = document.getElementById('btnMoveDown');
+
     const modal = document.getElementById('myModal');
     const modalForm = document.getElementById('modalForm');
     const username = document.getElementById('username');
@@ -55,6 +59,10 @@ window.onload = function()
     btnFire50.addEventListener('click', fire50);
     btnFire75.addEventListener('click', fire75);
     btnFire100.addEventListener('click', fire100);
+
+    btnMoveUp.addEventListener('click', moveUp);
+    btnMoveForward.addEventListener('click', moveForward);
+    btnMoveDown.addEventListener('click', moveDown);
 
     // Gestion keyboard keys
     document.addEventListener('keydown', (event) =>
@@ -125,7 +133,6 @@ window.onload = function()
             {
               move();
             }
-
 
           }
         });
@@ -217,13 +224,13 @@ window.onload = function()
     function fire25()
     {
         console.log('Firing at 25% !');
-        ws.send(JSON.stringify({ name: 'spaceship:turret:fire', data: { power: 0.25 }}));
+        ws.send(JSON.stringify({ name: 'spaceship:turret:fire', data: { power: -10 }}));
     }
     // Shoot at 50% of power
     function fire50()
     {
         console.log('Firing at 50% !');
-        ws.send(JSON.stringify({ name: 'spaceship:turret:fire', data: { power: 0.50 }}));
+        ws.send(JSON.stringify({ name: 'spaceship:turret:fire', data: { power: 0.25 }}));
     }
     // Shoot at 75% of power
     function fire75()
@@ -236,12 +243,23 @@ window.onload = function()
     {
         console.log('Firing at 100% !');
         ws.send(JSON.stringify({ name: 'spaceship:turret:fire', data: { power: 1 }}));
-        ws.send(JSON.stringify({ name: 'spaceship:move', data: { time: 5000, power: 1 }})); // Move spaceship for 1s
     }
 
-    function move()
+    // Move Up
+    function moveUp()
     {
-      ws.send(JSON.stringify({ name: 'spaceship:move', data: { time: 5000, power: 1 }})); // Move spaceship for 1s
+      ws.send(JSON.stringify({ name: 'spaceship:rotate', data: { angle: 45, direction: -1 }}));
+    }
+    // Move Forward
+    function moveForward()
+    {
+      ws.send(JSON.stringify({ name: 'spaceship:move', data: { time: 500, power: 1 }}));
+    }
+    // Move Down
+    function moveUp()
+    {
+      // ws.send(JSON.stringify({ name: 'spaceship:turnto', data: { angle: 100}}));
+      ws.send(JSON.stringify({ name: 'spaceship:rotate', data: { angle: 0, direction: -1 }}));
     }
 
 
