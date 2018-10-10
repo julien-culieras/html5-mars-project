@@ -239,7 +239,7 @@ window.onload = function()
     {
         console.log('Firing at 100% !');
         ws.send(JSON.stringify({ name: 'spaceship:turret:fire', data: { power: 1 }}));
-        // ws.send(JSON.stringify({ name: 'spaceship:move', data: { time: 5000, power: 1 }})); // Move spaceship for 1s
+        ws.send(JSON.stringify({ name: 'spaceship:move', data: { time: 5000, power: 1 }})); // Move spaceship for 1s
     }
 
     function move()

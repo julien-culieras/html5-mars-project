@@ -10,7 +10,7 @@
 /*  _ _ _ _ _ _ _ _ _ _ GENERAL _ _ _ _ _ _ _ _ _ _ */
 body
 {
-  background-image: url("/public/images/background_turret.jpg");
+  background-image: url("../images/background_turret.jpg");
 }
 
 h1, h2, h3, footer p, #displayInfo
