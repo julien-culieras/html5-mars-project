@@ -54,10 +54,15 @@
 
         <!-- Display user's informations (name & role) -->
         <article class="container row justify-content-around lead text-center" id="displayInfo">
-          <div class="col-6">
+          <div class="col-4">
             <p>USERNAME : <span id="displayUserName"></span></p>
           </div>
-          <div class="col-6">
+          <div class="col-4">
+            <p>AVATAR :</p>
+            <br />
+            <img id="avatarDisplay" alt="avatar">
+          </div>
+          <div class="col-4">
             <p>ROLE : <span id="displayRole"></span></p>
           </div>
         </article>
@@ -131,7 +136,7 @@
             <div class="row">
               <h3 class="h2 mx-auto">MOVE Action</h3>
             </div>
-            <!-- Top Buttons' Row -->
+            <!-- Buttons' Row -->
             <div class="row text-center justify-content-around">
               <div class="col-3">
                 <button id="btnMoveUp" type="button" class="btn btn-lg btn-dark active"><i class="fas fa-arrow-up"></i> UP</button>
@@ -165,16 +170,6 @@
     </div> <!-- end row -->
     <br />
 
-    <!-- Spaceship and Astrogirl Pictures -->
-    <!-- <div id="planet" class="col-7 text-center">
-      <img src="../public/images/planet.png" alt="astro-girl" width="300">
-    </div>
-    <div id="astrogirl" class="col-3 float-right">
-      <img src="../public/images/astrogirl.png" alt="astro-girl" width="300">
-    </div> -->
-
-
-
     <!-- ********************************************** -->
     <!--                      MODALE                    -->
     <!-- ********************************************** -->
@@ -203,7 +198,7 @@
           </select>
         </div>
         <div class="form-group">
-          <label for="avatar">Example file input</label>
+          <label for="avatar">Avatar :</label>
           <input type="file" class="form-control-file" id="avatar">
         </div>
 
@@ -213,9 +208,9 @@
 
   </div> <!-- end general container -->
 
-  <!-- <div id="spaceship" class="">
+  <div id="spaceship" class="">
     <img src="../public/images/spaceship.png" alt="astro-girl" width="500">
-  </div> -->
+  </div>
 
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

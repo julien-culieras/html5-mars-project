@@ -22,8 +22,10 @@ window.onload = function()
     const username = document.getElementById('username');
     const roleList = document.getElementById('roleList');
     const teamList = document.getElementById('teamList');
+    const avatar = document.getElementById('avatar');
     const displayUserName = document.getElementById('displayUserName');
     const displayRole = document.getElementById('displayRole');
+    const avatarDisplay = document.getElementById('avatarDisplay');
 
     const spanLife = document.getElementById('spanLife');
     const spanAngle = document.getElementById('spanAngle');
@@ -38,6 +40,7 @@ window.onload = function()
     const spanShield = document.getElementById('spanShield');
     const spanThrusterPower = document.getElementById('spanThrusterPower');
 
+    const reader = new FileReader();
     var ws;
 
     // *****************************************************
@@ -76,6 +79,9 @@ window.onload = function()
         else if (event.key === 'z') fire50();
         else if (event.key === 'e') fire75();
         else if (event.key === 'r') fire100();
+        else if (event.key === 'q') moveDown();
+        else if (event.key === 's') moveForward();
+        else if (event.key === 'd') moveUp();
     });
 
     window.addEventListener("gamepadconnected", function(e)
@@ -89,22 +95,22 @@ window.onload = function()
           if (button.pressed)
           {
             console.log(`button ${index} pressed ${button.value}`);
-            if (index == 0)
+            if (index == 0) //Button A
             {
               fire25();
             }
 
-            else if (index == 1)
+            else if (index == 1) //Button B
             {
               fire50();
             }
 
-            else if (index == 2)
+            else if (index == 2)// Button X
             {
               fire75();
             }
 
-            else if (index == 3)
+            else if (index == 3) //Button Y
             {
               fire100();
             }
@@ -121,19 +127,35 @@ window.onload = function()
 
             else if (index == 12)
             {
-              turnToZero();
+              // turnToZero();
+              moveUp();
             }
 
             else if (index == 13)
             {
-              turnToZero();
+              // turnToZero();
+              moveDown();
             }
 
             else if (index == 7)
             {
-              move();
+              moveForward();
             }
 
+            else if (index == 8)
+            {
+              lightSpeed();
+            }
+
+            else if (index == 9)
+            {
+              maxShield();
+            }
+
+            else if (index == 4)
+            {
+              maxSystemPower();
+            }
           }
         });
       }, 100);
@@ -151,6 +173,12 @@ window.onload = function()
       displayRole.textContent = roleList.value;
       modal.style.display = 'none';
 
+      // reader.onload = function()
+      // {
+      //     reader.readAsDataURL(avatar.value.files[0]);
+      //     avatarDisplay.setAttribute('src', reader.result);
+      //     console.log(reader.result);
+      // }
 
       wsConnection();
       e.preventDefault(); //Prevent from sending the form's data when clicking on the submit button
@@ -165,6 +193,8 @@ window.onload = function()
       const job = roleList.value;
       ws = new WebSocket(`ws://${url}?team=${team}&username=${user}&job=${job}`);
 
+      // ws.send(JSON.stringify({name : 'user:avatar', data: { avatar: reader.result }}));
+
       ws.onopen = function ()
       {
         console.log("socket open with server !");
@@ -172,7 +202,6 @@ window.onload = function()
 
       ws.onmessage = function (message)
       {
-
         message = JSON.parse(message.data);
         console.log(message.data);
 
@@ -193,7 +222,7 @@ window.onload = function()
       return ws;
     };
 
-    // - - - - - - - - - - -  FONCTIONS - - - - - - - - - - -
+    // - - - - - - - - - - -  FUNCTIONS - - - - - - - - - - -
 
     // Rotate the turret to the left
     function rotateLeft()
@@ -248,7 +277,7 @@ window.onload = function()
     // Move Up
     function moveUp()
     {
-      ws.send(JSON.stringify({ name: 'spaceship:rotate', data: { angle: 45, direction: -1 }}));
+      ws.send(JSON.stringify({ name: 'spaceship:rotate', data: { angle: 15, direction: -1 }}));
     }
     // Move Forward
     function moveForward()
@@ -256,10 +285,24 @@ window.onload = function()
       ws.send(JSON.stringify({ name: 'spaceship:move', data: { time: 500, power: 1 }}));
     }
     // Move Down
-    function moveUp()
+    function moveDown()
     {
-      // ws.send(JSON.stringify({ name: 'spaceship:turnto', data: { angle: 100}}));
-      ws.send(JSON.stringify({ name: 'spaceship:rotate', data: { angle: 0, direction: -1 }}));
+      ws.send(JSON.stringify({ name: 'spaceship:rotate', data: { angle: 15, direction: 1 }}));
+    }
+
+    // Put the ship' speed to the maximum !
+    function lightSpeed()
+    {
+      ws.send(JSON.stringify({ name: 'spaceship:thruster:power', data: { power: 1 }}));
+    }
+    // Put the ship' shield to the maximum !
+    function maxShield()
+    {
+      ws.send(JSON.stringify({ name: 'spaceship:shield:power', data: { power: 1 }}));
+    }
+    function maxSystemPower()
+    {
+      ws.send(JSON.stringify({ name: 'spaceship:system:power', data: { power: 1 }}));
     }
 
 
