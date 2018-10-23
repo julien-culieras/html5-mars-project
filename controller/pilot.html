@@ -1,128 +1,103 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Panneau de controle</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/public/styles/pilot.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Panneau de contrôle - Pilote</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <link rel="stylesheet" href="/public/styles/pilot.css">
+    </head>
+    <body class="container-fluid">
+        <div class="row">
+            <nav class="col-sm-3 information-panel">
+                <h2>Vaisseau</h2>
+                <ul>
+                    <li>LIFE/100 : <span id="spanLife" class="spanShowInfo"></span></li>
+                    <li>ANGLE : <span id="spanAngle" class="spanShowInfo"></span></li>
+                    <li>TURN TO ANGLE : <span id="spanTurnToAngle" class="spanShowInfo"></span></li>
+                    <li>X POSITION : <span id="spanXPosition" class="spanShowInfo"></span></li>
+                    <li>Y POSITION : <span id="spanYPosition" class="spanShowInfo"></span></li>
+                </ul>
 
-<div class="overlay"></div>
+                <h2>Tourelle</h2>
+                <ul>
+                    <li>ANGLE : <span id="spanAngleTourelle" class="spanShowInfo"></span></li>
+                    <li>TURN TO ANGLE : <span id="spanTurnToAngleTourelle" class="spanShowInfo"></span></li>
+                    <li>RELOADING : <span id="spanReloading" class="spanShowInfo"></span></li>
+                    <li>RELOADED : <span id="spanReloaded" class="spanShowInfo"></span></li>
+                </ul>
 
-<div class="containerPanel">
-    <div class="affichagePanel">
-        <h2>Vaisseau</h2>
-        <p>LIFE/100 : <span id="spanLife" class="spanShowInfo"></span></p>
-        <p>ANGLE : <span id="spanAngle" class="spanShowInfo"></span></p>
-        <p>TURN TO ANGLE : <span id="spanTurnToAngle" class="spanShowInfo"></span></p>
-        <p>X POSITION : <span id="spanXPosition" class="spanShowInfo"></span></p>
-        <p>Y POSITION : <span id="spanYPosition" class="spanShowInfo"></span></p>
-
-        <h2>Tourelle</h2>
-        <p>ANGLE : <span id="spanAngleTourelle" class="spanShowInfo"></span></p>
-        <p>TURN TO ANGLE : <span id="spanTurnToAngleTourelle" class="spanShowInfo"></span></p>
-        <p>RELOADING : <span id="spanReloading" class="spanShowInfo"></span></p>
-        <p>RELOADED : <span id="spanReloaded" class="spanShowInfo"></span></p>
-
-        <h2>Energie</h2>
-        <p>SYSTEM (HEALTH) : <span id="spanSystemHealth" class="spanShowInfo"></span></p>
-        <p>SHIELD : <span id="spanShield" class="spanShowInfo"></span></p>
-        <p>THRUSTER POWER : <span id="spanThrusterPower" class="spanShowInfo"></span></p>
-    </div>
-    <div class="controlPanel">
-        <div class="containerUserName">
-            <h1 id="affichageUserName"></h1>
-            <img id="avatarAffichage" alt="avatar">
-        </div>
-
-        <hr>
-
-        <div class="controlPanelMove">
-            <h2>Avancer</h2>
-            <div class="reglerPuissancePropulseur">
-                <label for="rangePropulseur">Puissance du propulseur</label>
-                <label id="affichagePropulseur" class="affichagePropulseur"></label>
-                <input
-                        min="1"
-                        max="10"
-                        value="5"
-                        class="rangePropulseur"
-                        id="rangePropulseur"
-                        type="range">
-            </div>
-            <div class="btnAvancer">
-                <div class="rightArrow">
-                    <i id="btnAvancer" class="fas fa-arrow-right fa-6x"></i>
-                </div>
-            </div>
-        </div>
-
-        <hr>
-
-        <div class="controlPanelRotate">
-            <h2>Rotation</h2>
-
-            <div class="blocRotate">
-                <div>
-                    <span id="affichageAngleRotation">0 °</span>
-                </div>
-                <div class="rocket">
-                    <i id="rocketIcon" class="fas fa-rocket fa-6x"></i>
-                </div>
-                <div class="rotateArrows">
-                    <div class="rotatePositive">
-                        <i id="btnRotateUp" data-move="up" class="fas fa-arrow-up fa-4x"></i>
+                <h2>Energie</h2>
+                <ul>
+                    <li>SYSTEM (HEALTH) : <span id="spanSystemHealth" class="spanShowInfo"></span></li>
+                    <li>SHIELD : <span id="spanShield" class="spanShowInfo"></span></li>
+                    <li>THRUSTER POWER : <span id="spanThrusterPower" class="spanShowInfo"></span></li>
+                </ul>
+            </nav>
+            <main class="col-sm-9">
+                <section class="control-panel">
+                    <h2 id="affichageUserName"></h2>
+                    <img class="avatar" alt="avatar">
+                    <hr>
+                    <aside class="controlPanelMove">
+                        <h3>Avancer</h3>
+                        <div class="reglerPuissancePropulseur">
+                            <label for="rangePropulseur">Puissance du propulseur</label>
+                            <label id="affichagePropulseur" class="affichagePropulseur"></label>
+                            <input min="1" max="10" value="5" class="rangePropulseur" id="rangePropulseur" type="range">
+                        </div>
+                        <div class="btnAvancer">
+                            <div class="rightArrow"><i id="btnAvancer" class="fas fa-arrow-right fa-6x"></i></div>
+                        </div>
+                    </aside>
+                    <hr>
+                    <aside class="controlPanelRotate">
+                        <h2>Rotation</h2>
+                        <section class="blocRotate">
+                            <p id="affichageAngleRotation">0 °</p>
+                            <p class="rocket"><i id="rocketIcon" class="fas fa-rocket fa-6x"></i></p>
+                            <div class="rotateArrows">
+                                <div class="rotatePositive"><i id="btnRotateUp" data-move="up" class="fas fa-arrow-up fa-4x"></i></div>
+                                <div class="rotateNegative"><i id="btnRotateDown" data-move="down" class="fas fa-arrow-down fa-4x"></i></div>
+                            </div>
+                        </section>
+                    </aside>
+                </section>
+                <div class="modal" id="modal" class="hidden">
+                    <div class="form-group">
+                        <label class="required" for="team">Votre équipe</label>
+                        <select id="team" class="form-control">
+                            <option value="1">Equipe 1</option>
+                            <option value="2">Equipe 2</option>
+                            <option value="3">Equipe 3</option>
+                            <option value="4">Equipe 4</option>
+                        </select>
                     </div>
-                    <div class="rotateNegative">
-                        <i id="btnRotateDown" data-move="down" class="fas fa-arrow-down fa-4x"></i>
+                    <div class="form-group">
+                        <label class="required" for="userName">Votre nom</label>
+                        <input id="userName" class="form-control" type="text">
+                        <span id="errorName"></span>
                     </div>
+                    <div class="form-group">
+                        <label class="required" for="role">Votre rôle</label>
+                        <select id="role" class="form-control">
+                            <option value="Pilote de ouf">Pilote de ouf</option>
+                            <option value="Artilleur d'élite">Artilleur d'élite</option>
+                            <option value="Ingénieur de la nasa">Ingénieur de la nasa</option>
+                            <option value="Capitaine de navire">Capitaine de navire</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="required" for="avatar-input">Votre avatar</label>
+                        <input id="avatar-input" class="form-control" type="file">
+                        <span id="errorAvatar"></span>
+                    </div>
+                    <button id="btnValiderModal" class="btn btn-primary">Valider</button>
                 </div>
-            </div>
+            </main>
         </div>
-
-
-
-    </div>
-
-    <div class="modal" id="modal" class="hidden">
-        <div class="form-group">
-            <label class="required" for="team">Votre équipe</label>
-            <select id="team" class="form-control">
-                <option value="1">Equipe 1</option>
-                <option value="2">Equipe 2</option>
-                <option value="3">Equipe 3</option>
-                <option value="4">Equipe 4</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label class="required" for="userName">Votre nom</label>
-            <input id="userName" class="form-control" type="text">
-            <span id="errorName"></span>
-        </div>
-        <div class="form-group">
-            <label class="required" for="role">Votre rôle</label>
-            <select id="role" class="form-control">
-                <option value="Pilote de ouf">Pilote de ouf</option>
-                <option value="Artilleur d'élite">Artilleur d'élite</option>
-                <option value="Ingénieur de la nasa">Ingénieur de la nasa</option>
-                <option value="Capitaine de navire">Capitaine de navire</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label class="required" for="avatar">Votre avatar</label>
-            <input id="avatar" class="form-control" type="file">
-            <span id="errorAvatar"></span>
-        </div>
-
-
-        <button id="btnValiderModal" class="btn btn-primary">Valider</button>
-    </div>
-</div>
-
-
-</body>
+        <footer>
+            <script src="/public/scripts/pilot.js"></script>
+        </footer>
+    </body>
 </html>
-
-<script src="/public/scripts/pilot.js"></script>
