@@ -1,7 +1,8 @@
 window.onload = function()
 {
-    // - - - - - - - - - - - VARIABLES - - - - - - - - - - -
-
+    // *****************************************************
+    //                       VARIABLES
+    // *****************************************************
     const btnRotateLeft = document.getElementById('rotate_btn_left');
     const btnRotateRight = document.getElementById('rotate_btn_right');
     const btnTurnToZero = document.getElementById('rotate_btn_0');
@@ -12,13 +13,19 @@ window.onload = function()
     const btnFire75 = document.getElementById('fire_btn_75');
     const btnFire100 = document.getElementById('fire_btn_100');
 
+    const btnMoveUp = document.getElementById('btnMoveUp');
+    const btnMoveForward = document.getElementById('btnMoveForward');
+    const btnMoveDown = document.getElementById('btnMoveDown');
+
     const modal = document.getElementById('myModal');
     const modalForm = document.getElementById('modalForm');
     const username = document.getElementById('username');
     const roleList = document.getElementById('roleList');
     const teamList = document.getElementById('teamList');
+    const avatar = document.getElementById('avatar');
     const displayUserName = document.getElementById('displayUserName');
     const displayRole = document.getElementById('displayRole');
+    const avatarDisplay = document.getElementById('avatarDisplay');
 
     const spanLife = document.getElementById('spanLife');
     const spanAngle = document.getElementById('spanAngle');
@@ -33,16 +40,17 @@ window.onload = function()
     const spanShield = document.getElementById('spanShield');
     const spanThrusterPower = document.getElementById('spanThrusterPower');
 
+    const reader = new FileReader();
     var ws;
 
-    var gp;
-
-    // - - - - - - - - - - -  PROGRAM - - - - - - - - - - -
-
+    // *****************************************************
+    //                       PROGRAM
+    // *****************************************************
     initModal();  // Display the modal on page loading
 
-    // - - - - - - - - - - -  EVENEMENTS - - - - - - - - - - -
-
+    // *****************************************************
+    //                       EVENTS
+    // *****************************************************
     modalForm.addEventListener('submit', closeModal);
 
     btnRotateLeft.addEventListener('click', rotateLeft);
@@ -54,6 +62,10 @@ window.onload = function()
     btnFire50.addEventListener('click', fire50);
     btnFire75.addEventListener('click', fire75);
     btnFire100.addEventListener('click', fire100);
+
+    btnMoveUp.addEventListener('click', moveUp);
+    btnMoveForward.addEventListener('click', moveForward);
+    btnMoveDown.addEventListener('click', moveDown);
 
     // Gestion keyboard keys
     document.addEventListener('keydown', (event) =>
@@ -67,6 +79,9 @@ window.onload = function()
         else if (event.key === 'z') fire50();
         else if (event.key === 'e') fire75();
         else if (event.key === 'r') fire100();
+        else if (event.key === 'q') moveDown();
+        else if (event.key === 's') moveForward();
+        else if (event.key === 'd') moveUp();
     });
 
     window.addEventListener("gamepadconnected", function(e)
@@ -80,22 +95,22 @@ window.onload = function()
           if (button.pressed)
           {
             console.log(`button ${index} pressed ${button.value}`);
-            if (index == 0)
+            if (index == 0) //Button A
             {
               fire25();
             }
 
-            else if (index == 1)
+            else if (index == 1) //Button B
             {
               fire50();
             }
 
-            else if (index == 2)
+            else if (index == 2)// Button X
             {
               fire75();
             }
 
-            else if (index == 3)
+            else if (index == 3) //Button Y
             {
               fire100();
             }
@@ -112,20 +127,35 @@ window.onload = function()
 
             else if (index == 12)
             {
-              turnToZero();
+              // turnToZero();
+              moveUp();
             }
 
             else if (index == 13)
             {
-              turnToZero();
+              // turnToZero();
+              moveDown();
             }
 
             else if (index == 7)
             {
-              move();
+              moveForward();
             }
 
+            else if (index == 8)
+            {
+              lightSpeed();
+            }
 
+            else if (index == 9)
+            {
+              maxShield();
+            }
+
+            else if (index == 4)
+            {
+              maxSystemPower();
+            }
           }
         });
       }, 100);
@@ -143,12 +173,18 @@ window.onload = function()
       displayRole.textContent = roleList.value;
       modal.style.display = 'none';
 
+      // reader.onload = function()
+      // {
+      //     reader.readAsDataURL(avatar.value.files[0]);
+      //     avatarDisplay.setAttribute('src', reader.result);
+      //     console.log(reader.result);
+      // }
 
       wsConnection();
       e.preventDefault(); //Prevent from sending the form's data when clicking on the submit button
     }
 
-    // Connect with the websocket
+    // Connection with the websocket
     function wsConnection ()
     {
       const url = '92.222.88.16:9090';
@@ -156,10 +192,8 @@ window.onload = function()
       const user = username.value;
       const job = roleList.value;
       ws = new WebSocket(`ws://${url}?team=${team}&username=${user}&job=${job}`);
-      // ws = new WebSocket(`ws://92.222.88.16:9090?team=4&username=Bento&job=Gunner`);
-      console.log(ws);
-      console.log(`ws://${url}?team=${team}&username=${user}&job=${job}`);
 
+      // ws.send(JSON.stringify({name : 'user:avatar', data: { avatar: reader.result }}));
 
       ws.onopen = function ()
       {
@@ -168,15 +202,14 @@ window.onload = function()
 
       ws.onmessage = function (message)
       {
-
         message = JSON.parse(message.data);
         console.log(message.data);
 
         spanLife.textContent = message.data.life;
         spanAngle.textContent = message.data.angle;
         spanTurnToAngle.textContent = message.data.turnTo;
-        spanXPosition.textContent = message.data.x;
-        spanYPosition.textContent = message.data.y;
+        spanXPosition.textContent = Math.round(message.data.x);
+        spanYPosition.textContent = Math.round(message.data.y);
         spanAngleTourelle.textContent = message.data.turretAngle;
         spanTurnToAngleTourelle.textContent = message.data.turretTurnTo;
         spanReloading.textContent = message.data.reloading;
@@ -189,7 +222,7 @@ window.onload = function()
       return ws;
     };
 
-    // - - - - - - - - - - -  FONCTIONS - - - - - - - - - - -
+    // - - - - - - - - - - -  FUNCTIONS - - - - - - - - - - -
 
     // Rotate the turret to the left
     function rotateLeft()
@@ -220,13 +253,13 @@ window.onload = function()
     function fire25()
     {
         console.log('Firing at 25% !');
-        ws.send(JSON.stringify({ name: 'spaceship:turret:fire', data: { power: 0.25 }}));
+        ws.send(JSON.stringify({ name: 'spaceship:turret:fire', data: { power: -10 }}));
     }
     // Shoot at 50% of power
     function fire50()
     {
         console.log('Firing at 50% !');
-        ws.send(JSON.stringify({ name: 'spaceship:turret:fire', data: { power: 0.50 }}));
+        ws.send(JSON.stringify({ name: 'spaceship:turret:fire', data: { power: 0.25 }}));
     }
     // Shoot at 75% of power
     function fire75()
@@ -239,12 +272,37 @@ window.onload = function()
     {
         console.log('Firing at 100% !');
         ws.send(JSON.stringify({ name: 'spaceship:turret:fire', data: { power: 1 }}));
-        // ws.send(JSON.stringify({ name: 'spaceship:move', data: { time: 5000, power: 1 }})); // Move spaceship for 1s
     }
 
-    function move()
+    // Move Up
+    function moveUp()
     {
-      ws.send(JSON.stringify({ name: 'spaceship:move', data: { time: 5000, power: 1 }})); // Move spaceship for 1s
+      ws.send(JSON.stringify({ name: 'spaceship:rotate', data: { angle: 15, direction: -1 }}));
+    }
+    // Move Forward
+    function moveForward()
+    {
+      ws.send(JSON.stringify({ name: 'spaceship:move', data: { time: 500, power: 1 }}));
+    }
+    // Move Down
+    function moveDown()
+    {
+      ws.send(JSON.stringify({ name: 'spaceship:rotate', data: { angle: 15, direction: 1 }}));
+    }
+
+    // Put the ship' speed to the maximum !
+    function lightSpeed()
+    {
+      ws.send(JSON.stringify({ name: 'spaceship:thruster:power', data: { power: 1 }}));
+    }
+    // Put the ship' shield to the maximum !
+    function maxShield()
+    {
+      ws.send(JSON.stringify({ name: 'spaceship:shield:power', data: { power: 1 }}));
+    }
+    function maxSystemPower()
+    {
+      ws.send(JSON.stringify({ name: 'spaceship:system:power', data: { power: 1 }}));
     }
 
 

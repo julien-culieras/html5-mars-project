@@ -26,13 +26,13 @@ window.onload = function () {
     const btnValiderModal = document.getElementById('btnValiderModal');
     const userName = document.getElementById('userName');
     const role = document.getElementById('role');
-    const avatar = document.getElementById('avatar');
+    const avatar = document.getElementById('avatar-input');
     const team = document.getElementById('team');
     const affichageUserName = document.getElementById('affichageUserName');
     const errorName = document.getElementById('errorName');
     const errorAvatar = document.getElementById('errorAvatar');
     const reader = new FileReader();
-    const avatarAffichage = document.getElementById('avatarAffichage');
+    const avatarAffichage = document.querySelector('.avatar');
 
     /**
      * Events DOM

@@ -5,7 +5,9 @@ HTML5 Mars Project Contrôleurs
 
 CULIERAS Julien - BOUDIER Benjamin : Pilote
 
-BENTO-PEREIRA David - BONIN Léo
+BENTO-PEREIRA David - BONIN Léo : Tourelle
+
+DAVID Axel - PAUTET Romain : Ingénieur
 
 # Description
 
@@ -35,3 +37,18 @@ Le dashboard de l'artilleur se compose d'une interface d'information sur l'état
 - Le second permet de contrôler le tir de la tourelle
 
 Go to [http://localhost:8080/controller/turret](http://localhost:8080/controller/turret)
+
+## Ingénieur
+
+Le widget de la gestion de l'énergie permet de régler les proportions d'énergies allouées aux unités de "propulsion", "bouclier" et "système".
+Des curseurs permettent de changer la part de chaque unité (les autres sont calculées en conséquence). Des bouttons d'incrémentation et de décrémentation permettent une approche pas à pas.
+Des combinaisons de touches facilitent ces changements : **a** modifiera la propulsion, **z** le bouclier, **e** le système, grâce aux modificateurs **←** et **→** permettant respectivement la décrémentation et l'incrémentation de l'unité.
+
+Des paramètres peuvent altérer le fonctionnement général du widget :
+
+* mode automatique : délègue la gestion à une pseudo-intelligence basique
+* modificateur de pas : change le pas de modification
+
+Un 3ème élément informe du niveau de vie du vaisseau.
+
+Go to [http://localhost:8080/controller/engineer](http://localhost:8080/controller/engineer)

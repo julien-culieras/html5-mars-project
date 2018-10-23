@@ -4,19 +4,26 @@
     <meta charset='UTF-8' />
     <meta http-equiv='x-ua-compatible' content='ie=edge' />
     <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>Spaceship Control Panel</title>
+    <!-- Website Icon -->
+    <link rel="icon" type="image/x-icon" href="../public/images/rocket_icon.png" />
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <!-- Own css -->
-    <link rel="stylesheet" href="/public/styles/turret.css">
+    <link rel="stylesheet" href="../public/styles/turret.css">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-    <title>Spaceship Control Panel</title>
 </head>
 <body>
+  <br />
   <div class="container">
 
     <div class="row justify-content-between">
-      <!--  _ _ _ _ _ _ _ _ _ _ ASIDE _ _ _ _ _ _ _ _ _ _ -->
+
+      <!-- ********************************************** -->
+      <!--                      ASIDE                     -->
+      <!-- ********************************************** -->
       <aside class="col-2" id="info_panel">
         <h2>SPACESHIP</h2>
         <p>LIFE/100 : <span id="spanLife" class="spanShowInfo"></span></p>
@@ -32,114 +39,140 @@
         <p>RELOADED : <span id="spanReloaded" class="spanShowInfo"></span></p>
 
         <h2>ENERGY</h2>
-        <p>SYSTEM (HEALTH) : <span id="spanSystemHealth" class="spanShowInfo"></span></p>
+        <p>SYS. HEALTH : <span id="spanSystemHealth" class="spanShowInfo"></span></p>
         <p>SHIELD : <span id="spanShield" class="spanShowInfo"></span></p>
-        <p>THRUSTER POWER : <span id="spanThrusterPower" class="spanShowInfo"></span></p>
+        <p>THRUSTER : <span id="spanThrusterPower" class="spanShowInfo"></span></p>
       </aside>
 
-      <!--  _ _ _ _ _ _ _ _ _ _ SECTION _ _ _ _ _ _ _ _ _ _ -->
+      <!-- ********************************************** -->
+      <!--                      SECTION                   -->
+      <!-- ********************************************** -->
       <section class="col-9" id="fire_actions">
 
-          <!-- Main Page Title -->
-          <h1 class=" display-1 text-center">FIRE COMMANDS</h1>
+        <!-- Main Page Title -->
+        <h1 class=" display-1 text-center">FIRE COMMANDS</h1>
 
-          <!-- Display user's informations (name & role) -->
-          <article class="container row justify-content-around lead text-center" id="displayInfo">
-            <div class="col-6">
-              <p>USERNAME : <span id="displayUserName"></span></p>
+        <!-- Display user's informations (name & role) -->
+        <article class="container row justify-content-around lead text-center" id="displayInfo">
+          <div class="col-4">
+            <p>USERNAME : <span id="displayUserName"></span></p>
+          </div>
+          <div class="col-4">
+            <p>AVATAR :</p>
+            <br />
+            <img id="avatarDisplay" alt="avatar">
+          </div>
+          <div class="col-4">
+            <p>ROLE : <span id="displayRole"></span></p>
+          </div>
+        </article>
+
+        <div class="row justify-content-around mx-center">
+
+          <!-- ************ ROTATION ACTION ************ -->
+          <article id="rotate_action" class="col-12 col-sm-5">
+            <!-- Section Title -->
+            <div class="row">
+              <h3 class="h2 mx-auto">Rotate Action</h3>
             </div>
-            <div class="col-6">
-              <p>ROLE : <span id="displayRole"></span></p>
+            <!-- Top Buttons' Row -->
+            <div class="row text-center">
+              <div class="col-6">
+                <button id="rotate_btn_left" type="button" class="btn btn-lg btn-dark active"><i class="fas fa-arrow-left"></i>Left</button>
+              </div>
+              <div class="col-6">
+                <button id="rotate_btn_right" type="button" class="btn btn-lg btn-dark active"><i class="fas fa-arrow-right"></i>Right</button>
+              </div>
             </div>
-          </article>
+            <br>
+            <!-- Bottom Buttons' Row -->
+            <div class="row text-center">
+              <div class="col-6">
+                <button id="rotate_btn_180" type="button" class="btn btn-lg btn-dark active"><i class="far fa-circle"></i>180°</button>
+              </div>
+              <div class="col-6">
+                <button id="rotate_btn_0" type="button" class="btn btn-lg btn-dark active"><i class="far fa-circle"></i>0°</button>
+              </div>
+            </div>
+            <br />
+          </article> <!-- end div id="rotate_action"-->
 
-          <div class="row justify-content-around mx-center">
+          <!-- ************ FIRE ACTION ************ -->
+          <article id="fire_action" class="col-12 col-sm-5">
+            <!-- Section Title -->
+            <div class="row">
+              <h3 class="h2 mx-auto">Fire Action</h3>
+            </div>
+            <!-- Top Buttons' Row -->
+            <div class="row text-center">
+              <div class="col-6">
+                <button id="fire_btn_25" type="button" class="btn btn-lg btn-dark active"><i class="fas fa-fire"></i>25 %</button>
+              </div>
+              <div class="col-6">
+                <button id="fire_btn_50" type="button" class="btn btn-lg btn-dark active"><i class="fas fa-fire"></i>50 %</button>
+              </div>
+            </div>
+            <br>
+            <!-- Bottom Buttons' Row -->
+            <div class="row text-center">
+              <div class="col-6">
+                <button id="fire_btn_75" type="button" class="btn btn-lg btn-dark active"><i class="fas fa-fire"></i>75 %</button>
+              </div>
+              <div class="col-6">
+                <button id="fire_btn_100" type="button" class="btn btn-lg btn-dark active"><i class="fas fa-fire"></i>100 %</button>
+              </div>
+            </div>
+            <br />
+          </article> <!-- end div id="fire_action"-->
 
-            <!-- _ _ _ _ _ ROTATION ACTION _ _ _ _ _ -->
-            <article id="rotate_action" class="col-12 col-sm-5">
-              <!-- Section Title -->
-              <div class="row">
-                <h3 class="h2 mx-auto">Rotate Action</h3>
-              </div>
-              <!-- Top Buttons' Row -->
-              <div class="row text-center">
-                <div class="col-6" id="rotate_btn_left">
-                  <button type="button" class="btn btn-lg btn-dark active"><i class="fas fa-arrow-left"></i>Left</button>
-                </div>
-                <div class="col-6" id="rotate_btn_right">
-                  <button type="button" class="btn btn-lg btn-dark active"><i class="fas fa-arrow-right"></i>Right</button>
-                </div>
-              </div>
-              <br>
-              <!-- Bottom Buttons' Row -->
-              <div class="row text-center">
-                <div class="col-6" id="rotate_btn_180">
-                  <button type="button" class="btn btn-lg btn-dark active"><i class="far fa-circle"></i>180°</button>
-                </div>
-                <div class="col-6" id="rotate_btn_0">
-                  <button type="button" class="btn btn-lg btn-dark active"><i class="far fa-circle"></i>0°</button>
-                </div>
-              </div>
-              <br />
-            </article> <!-- end div id="rotate_action"-->
+        </div> <!-- end row -->
 
-            <!-- _ _ _ _ _ FIRE ACTION _ _ _ _ _ -->
-            <article id="fire_action" class="col-12 col-sm-5">
-              <!-- Section Title -->
-              <div class="row">
-                <h3 class="h2 mx-auto">Fire Action</h3>
-              </div>
-              <!-- Top Buttons' Row -->
-              <div class="row text-center">
-                <div class="col-6" id="fire_btn_25">
-                  <button type="button" class="btn btn-lg btn-dark active"><i class="fas fa-fire"></i>25 %</button>
-                </div>
-                <div class="col-6" id="fire_btn_50">
-                  <button type="button" class="btn btn-lg btn-dark active"><i class="fas fa-fire"></i>50 %</button>
-                </div>
-              </div>
-              <br>
-              <!-- Bottom Buttons' Row -->
-              <div class="row text-center">
-                <div class="col-6" id="fire_btn_75">
-                  <button type="button" class="btn btn-lg btn-dark active"><i class="fas fa-fire"></i>75 %</button>
-                </div>
-                <div class="col-6" id="fire_btn_100">
-                  <button type="button" class="btn btn-lg btn-dark active"><i class="fas fa-fire"></i>100 %</button>
-                </div>
-              </div>
-              <br />
-            </article> <!-- end div id="fire_action"-->
+        <br />
 
-          </div> <!-- end row -->
+        <!-- ************ MOVE ACTION ************ -->
+        <div class="row justify-content-center">
+          <article id="move_action" class="col-12 col-sm-8">
+            <!-- Section Title -->
+            <div class="row">
+              <h3 class="h2 mx-auto">MOVE Action</h3>
+            </div>
+            <!-- Buttons' Row -->
+            <div class="row text-center justify-content-around">
+              <div class="col-3">
+                <button id="btnMoveUp" type="button" class="btn btn-lg btn-dark active"><i class="fas fa-arrow-up"></i> UP</button>
+              </div>
+              <div class="col-3">
+                <button id="btnMoveForward" type="button" class="btn btn-lg btn-dark active"><i class="fas fa-arrow-right"></i>MOVE</button>
+              </div>
+              <div class="col-3">
+                <button id="btnMoveDown" type="button" class="btn btn-lg btn-dark active"><i class="fas fa-arrow-down"></i>DOWN</button>
+              </div>
+            </div>
+            <br />
+          </article> <!-- end div id="fire_action"-->
           <br />
-
-          <!-- Spaceship and Astrogirl Pictures -->
-          <div class="row">
-            <div id="planet" class="col-7 text-center">
-              <img src="/public/images/planet.png" alt="astro-girl" width="300">
-            </div>
-            <div id="astrogirl" class="col-3 float-right">
-              <img src="/public/images/astrogirl.png" alt="astro-girl" width="300">
+        </div>
+        <br>
+        <!-- ********************************************** -->
+        <!--                      FOOTER                    -->
+        <!-- ********************************************** -->
+        <footer>
+          <div class="container">
+            <div class="row text-center">
+              <div class="col">
+                <p>Made by = Bento-Pereira David + Leo Bonin</p>
+              </div>
             </div>
           </div>
+        </footer>
 
       </section>
     </div> <!-- end row -->
     <br />
 
-    <!--  _ _ _ _ _ _ _ _ _ _ FOOTER _ _ _ _ _ _ _ _ _ _ -->
-    <footer>
-      <div class="container">
-        <div class="row text-center">
-          <div class="col">
-            <p>Made by = Bento-Pereira David + Leo Bonin</p>
-          </div>
-        </div>
-      </div>
-    </footer>
-
-    <!--  _ _ _ _ _ _ _ _ _ _ MODALE _ _ _ _ _ _ _ _ _ _ -->
+    <!-- ********************************************** -->
+    <!--                      MODALE                    -->
+    <!-- ********************************************** -->
     <div class="container" id="myModal">
       <form id="modalForm">
         <div class="form-group">
@@ -165,7 +198,7 @@
           </select>
         </div>
         <div class="form-group">
-          <label for="avatar">Example file input</label>
+          <label for="avatar">Avatar :</label>
           <input type="file" class="form-control-file" id="avatar">
         </div>
 
@@ -173,12 +206,11 @@
       </form>
     </div>
 
-
   </div> <!-- end general container -->
 
-  <!-- <div id="spaceship" class="">
-    <img src="/public/images/spaceship.png" alt="astro-girl" width="500">
-  </div> -->
+  <div id="spaceship" class="">
+    <img src="../public/images/spaceship.png" alt="astro-girl" width="500">
+  </div>
 
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -186,7 +218,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
   <!-- Optional JavaScript -->
-  <script type="text/javascript" src="/public/scripts/turret.js"></script>
+  <script type="text/javascript" src="../public/scripts/turret.js"></script>
 
 </body>
 </html>
